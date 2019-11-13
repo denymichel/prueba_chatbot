@@ -6,17 +6,14 @@
 package chatbot.prueba.domain;
 
         import java.io.Serializable;
-        import java.util.Collection;
         import javax.persistence.Basic;
         import javax.persistence.Column;
         import javax.persistence.Entity;
         import javax.persistence.Id;
         import javax.persistence.NamedQueries;
         import javax.persistence.NamedQuery;
-        import javax.persistence.OneToMany;
         import javax.persistence.Table;
         import javax.xml.bind.annotation.XmlRootElement;
-        import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +27,7 @@ package chatbot.prueba.domain;
         , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
         , @NamedQuery(name = "Persona.findByNombres", query = "SELECT p FROM Persona p WHERE p.nombres = :nombres")
         , @NamedQuery(name = "Persona.findByApellidos", query = "SELECT p FROM Persona p WHERE p.apellidos = :apellidos")
+        , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
         , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")})
 public class Persona implements Serializable {
 
@@ -37,38 +35,28 @@ public class Persona implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id_persona")
-    private Integer idPersona;
-    @Basic(optional = false)
+    private Short idPersona;
     @Column(name = "nombres")
     private String nombres;
-    @Basic(optional = false)
     @Column(name = "apellidos")
     private String apellidos;
-    @Basic(optional = false)
+    @Column(name = "ci")
+    private Integer ci;
     @Column(name = "telefono")
-    private int telefono;
-    @OneToMany(mappedBy = "idPersona")
-    private Collection<Usuario> usuarioCollection;
+    private Integer telefono;
 
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
+    public Persona(Short idPersona) {
         this.idPersona = idPersona;
     }
 
-    public Persona(Integer idPersona, String nombres, String apellidos, int telefono) {
-        this.idPersona = idPersona;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.telefono = telefono;
-    }
-
-    public Integer getIdPersona() {
+    public Short getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(Integer idPersona) {
+    public void setIdPersona(Short idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -88,21 +76,20 @@ public class Persona implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public int getTelefono() {
+    public Integer getCi() {
+        return ci;
+    }
+
+    public void setCi(Integer ci) {
+        this.ci = ci;
+    }
+
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
-
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
     }
 
     @Override
@@ -127,11 +114,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "idPersona=" + idPersona +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", telefono=" + telefono +
-                '}';
+        return "domainchatbot.Persona[ idPersona=" + idPersona + " ]";
     }
+
 }

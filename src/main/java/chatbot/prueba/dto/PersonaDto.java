@@ -1,10 +1,5 @@
 package chatbot.prueba.dto;
 
-import chatbot.prueba.domain.Persona;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-
 public class PersonaDto {
 
     private Integer idPersona;

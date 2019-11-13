@@ -1,10 +1,8 @@
 package chatbot.prueba.api;
 
 import chatbot.prueba.dao.PersonRepository;
-import chatbot.prueba.domain.Persona;
 import chatbot.prueba.dto.PersonaDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.http.MediaType;
