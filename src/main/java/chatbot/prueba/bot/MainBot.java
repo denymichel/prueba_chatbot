@@ -1,36 +1,45 @@
 package chatbot.prueba.bot;
 
+        import chatbot.prueba.dao.PersonRepository;
+        import chatbot.prueba.domain.Persona;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.stereotype.Component;
+        import org.telegram.telegrambots.ApiContextInitializer;
+        import org.telegram.telegrambots.meta.TelegramBotsApi;
+        import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+        import org.telegram.telegrambots.meta.api.objects.Message;
+        import org.telegram.telegrambots.meta.api.objects.Update;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+        import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+        import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+        import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+        import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
-import org.telegram.telegrambots.ApiContextInitializer;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
-
-
-import javax.validation.groups.ConvertGroup;
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 
 public class MainBot extends TelegramLongPollingBot{
 
+
+    PersonRepository personRepository;
+    public MainBot(PersonRepository personRepository){
+        this.personRepository = personRepository;
+    }
+
+    /** ponemos el codigo en la clase BotInitializator
     public static void main (String[] args) {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try { telegramBotsApi.registerBot(new chatbot.prueba.bot.MainBot());
+        try { telegramBotsApi.registerBot(new MainBot());
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }
     }
-
-
+*/
+/**
     public void sendMsg(Message message, String text){
         SendMessage sendMessage = new SendMessage();
         sendMessage.enableMarkdown(true);
@@ -38,23 +47,21 @@ public class MainBot extends TelegramLongPollingBot{
         sendMessage.setReplyToMessageId(message.getMessageId());
         sendMessage.setText(text);
         try {
-            setButtons(sendMessage);
-            // sendMessage(sendMessage);
-        }catch (TelegramApiException e){
+           //   setButtons(sendMessage);
+            sendMessage(sendMessage);
+        }catch(TelegramApiException e){
             e.printStackTrace();
         }
     }
 
+    @Override
     public void onUpdateReceived(Update update) {
         //  Model model = new Model();
-        Message message = update.getMessage();
+          Message message = update.getMessage();
         if (message != null && message.hasText()) {
             switch (message.getText()) {
                 case "/inicio":
-
-                    sendMsg(message, "hola soy el asistente automatico                 " +
-                            "En que te puedo ayudar?"
-                    );
+                    sendMsg(message, "Hola soy el asistente automatico, en que te puedo ayudar?");
                     break;
                 case "/ReservarCitaMedica":
                     sendMsg(message, "Porfavor seleccione una especialidad       " );
@@ -62,7 +69,6 @@ public class MainBot extends TelegramLongPollingBot{
                             "/Pediatria         " +
                             "/Traumatologia     ");
                     break;
-
                 case "/VerEspecialidades":
                     sendMsg(message, "/MedicinaGeneral");
                     sendMsg(message, "/Pediatria");
@@ -70,9 +76,27 @@ public class MainBot extends TelegramLongPollingBot{
                 default:
             }
         }
-
     }
+*/
+    @Override
+    public void onUpdateReceived(Update update) {
+        System.out.println(update);
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            Persona persona= personRepository.findById(1).get();        //sacamos la persona con id 1 de la BD
+          //  CpPerson cpPerson = customerBl.findPersonById(1);
+            // customerBl.
+            SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
+                    .setChatId(update.getMessage().getChatId())
+                    .setText("Persona desde base de datos: "+ persona);
 
+            try {
+                this.execute(message);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+/**
     public void setButtons(SendMessage sendMessage){
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         sendMessage.setReplyMarkup(replyKeyboardMarkup);
@@ -90,13 +114,19 @@ public class MainBot extends TelegramLongPollingBot{
         keyboardRowsList.add(keyboardFirstRow);
         replyKeyboardMarkup.setKeyboard(keyboardRowsList);
     }
-
-
+*/
+    @Override
     public String getBotUsername() {
         return "AsisMedBot";
     }
-
+    @Override
     public String getBotToken() {
         return "965898434:AAFYisxZkAsAWykdChxs9DNy1ceCADAmogo";
+    }
+
+
+    @Override
+    public void clearWebhook() throws TelegramApiRequestException {
+        System.out.println("Se invoco clearWebhook");
     }
 }

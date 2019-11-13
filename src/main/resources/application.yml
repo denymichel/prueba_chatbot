@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: chatbot
+  datasource:
+    platform: mysql
+    url: jdbc:mysql://localhost:3306/personachatbot?serverTimezone=UTC
+    username: root
+    password: vayopoke
+  jpa:
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        legacy_limit_handler: true
+        ddl-auto: update
+        show_sql: true
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: tru
