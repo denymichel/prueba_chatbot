@@ -125,8 +125,5 @@ public class MainBot extends TelegramLongPollingBot{
     }
 
 
-    @Override
-    public void clearWebhook() throws TelegramApiRequestException {
-        System.out.println("Se invoco clearWebhook");
-    }
+
 }

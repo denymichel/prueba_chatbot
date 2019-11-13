@@ -29,7 +29,7 @@ public class BotInitializator {
     public void init() {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try { telegramBotsApi.registerBot(new chatbot.prueba.bot.MainBot(personRepository));
+        try { telegramBotsApi.registerBot(new MainBot(personRepository));
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }

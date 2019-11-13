@@ -5,7 +5,7 @@ spring:
     platform: mysql
     url: jdbc:mysql://localhost:3306/personachatbot?serverTimezone=UTC
     username: root
-    password: vayopoke
+    password:
   jpa:
     hibernate:
       ddl-auto: none
