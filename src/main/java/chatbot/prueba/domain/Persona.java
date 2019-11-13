@@ -114,7 +114,12 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "domainchatbot.Persona[ idPersona=" + idPersona + " ]";
+        return "Persona{" +
+                "idPersona=" + idPersona +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", ci=" + ci +
+                ", telefono=" + telefono +
+                '}';
     }
-
 }

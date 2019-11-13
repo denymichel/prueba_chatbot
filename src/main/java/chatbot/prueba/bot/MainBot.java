@@ -1,6 +1,7 @@
 package chatbot.prueba.bot;
 
         import chatbot.prueba.dao.PersonRepository;
+        import chatbot.prueba.domain.Persona;
         import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
         import org.telegram.telegrambots.meta.api.objects.Update;
         import org.telegram.telegrambots.bots.TelegramLongPollingBot;
