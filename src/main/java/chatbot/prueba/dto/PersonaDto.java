@@ -1,12 +1,17 @@
 package chatbot.prueba.dto;
 
+import chatbot.prueba.domain.Persona;
+
+import javax.persistence.Column;
+
 public class PersonaDto {
 
-    private Integer idPersona;
+
+    private Short idPersona;
     private String nombres;
     private String apellidos;
-    private int telefono;
-
+    private Integer ci;
+    private Integer telefono;
 
     public PersonaDto() {
     }
@@ -14,14 +19,15 @@ public class PersonaDto {
     public PersonaDto(Persona persona) {
         this.nombres = persona.getNombres();
         this.apellidos = persona.getApellidos();
+        this.ci = persona.getCi();
         this.telefono = persona.getTelefono();
     }
 
-    public Integer getIdPersona() {
+    public Short getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(Integer idPersona) {
+    public void setIdPersona(Short idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -41,11 +47,19 @@ public class PersonaDto {
         this.apellidos = apellidos;
     }
 
-    public int getTelefono() {
+    public Integer getCi() {
+        return ci;
+    }
+
+    public void setCi(Integer ci) {
+        this.ci = ci;
+    }
+
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 }
