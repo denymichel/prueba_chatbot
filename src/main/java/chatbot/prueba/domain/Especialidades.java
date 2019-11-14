@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,20 +5,21 @@
  */
 package chatbot.prueba.domain;
 
-        import java.io.Serializable;
-        import java.util.Collection;
-        import javax.persistence.Basic;
-        import javax.persistence.Column;
-        import javax.persistence.Entity;
-        import javax.persistence.Id;
-        import javax.persistence.JoinColumn;
-        import javax.persistence.ManyToOne;
-        import javax.persistence.NamedQueries;
-        import javax.persistence.NamedQuery;
-        import javax.persistence.OneToMany;
-        import javax.persistence.Table;
-        import javax.xml.bind.annotation.XmlRootElement;
-        import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,28 +37,30 @@ public class Especialidades implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id_especialidades")
-    private Short idEspecialidades;
-    @Column(name = "especialidad")
+    @Column(name = "idEspecialidades")
+    private Integer idEspecialidades;
+    @Column(name = "Especialidad")
     private String especialidad;
-    @OneToMany(mappedBy = "idEspecialidades")
-    private Collection<MedicoEspecialidad> medicoEspecialidadCollection;
-    @JoinColumn(name = "id_turnos", referencedColumnName = "id_turnos")
-    @ManyToOne
+    @JoinColumn(name = "idTurnos", referencedColumnName = "idTurnos")
+    @ManyToOne(optional = false)
     private Turnos idTurnos;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEspecialidades")
+    private Collection<Reservas> reservasCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEspecialidades")
+    private Collection<Medico> medicoCollection;
 
     public Especialidades() {
     }
 
-    public Especialidades(Short idEspecialidades) {
+    public Especialidades(Integer idEspecialidades) {
         this.idEspecialidades = idEspecialidades;
     }
 
-    public Short getIdEspecialidades() {
+    public Integer getIdEspecialidades() {
         return idEspecialidades;
     }
 
-    public void setIdEspecialidades(Short idEspecialidades) {
+    public void setIdEspecialidades(Integer idEspecialidades) {
         this.idEspecialidades = idEspecialidades;
     }
 
@@ -70,21 +72,30 @@ public class Especialidades implements Serializable {
         this.especialidad = especialidad;
     }
 
-    @XmlTransient
-    public Collection<MedicoEspecialidad> getMedicoEspecialidadCollection() {
-        return medicoEspecialidadCollection;
-    }
-
-    public void setMedicoEspecialidadCollection(Collection<MedicoEspecialidad> medicoEspecialidadCollection) {
-        this.medicoEspecialidadCollection = medicoEspecialidadCollection;
-    }
-
     public Turnos getIdTurnos() {
         return idTurnos;
     }
 
     public void setIdTurnos(Turnos idTurnos) {
         this.idTurnos = idTurnos;
+    }
+
+    @XmlTransient
+    public Collection<Reservas> getReservasCollection() {
+        return reservasCollection;
+    }
+
+    public void setReservasCollection(Collection<Reservas> reservasCollection) {
+        this.reservasCollection = reservasCollection;
+    }
+
+    @XmlTransient
+    public Collection<Medico> getMedicoCollection() {
+        return medicoCollection;
+    }
+
+    public void setMedicoCollection(Collection<Medico> medicoCollection) {
+        this.medicoCollection = medicoCollection;
     }
 
     @Override
@@ -109,8 +120,7 @@ public class Especialidades implements Serializable {
 
     @Override
     public String toString() {
-        return "domainchatbot.Especialidades[ idEspecialidades=" + idEspecialidades + " ]";
+        return "domain.Especialidades[ idEspecialidades=" + idEspecialidades + " ]";
     }
 
 }
-

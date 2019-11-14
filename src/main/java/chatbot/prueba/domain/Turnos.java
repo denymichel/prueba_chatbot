@@ -5,21 +5,22 @@
  */
 package chatbot.prueba.domain;
 
-        import java.io.Serializable;
-        import java.util.Collection;
-        import java.util.Date;
-        import javax.persistence.Basic;
-        import javax.persistence.Column;
-        import javax.persistence.Entity;
-        import javax.persistence.Id;
-        import javax.persistence.NamedQueries;
-        import javax.persistence.NamedQuery;
-        import javax.persistence.OneToMany;
-        import javax.persistence.Table;
-        import javax.persistence.Temporal;
-        import javax.persistence.TemporalType;
-        import javax.xml.bind.annotation.XmlRootElement;
-        import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,38 +33,34 @@ package chatbot.prueba.domain;
         @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t")
         , @NamedQuery(name = "Turnos.findByIdTurnos", query = "SELECT t FROM Turnos t WHERE t.idTurnos = :idTurnos")
         , @NamedQuery(name = "Turnos.findByTurno", query = "SELECT t FROM Turnos t WHERE t.turno = :turno")
-        , @NamedQuery(name = "Turnos.findByFecha", query = "SELECT t FROM Turnos t WHERE t.fecha = :fecha")
         , @NamedQuery(name = "Turnos.findByHora", query = "SELECT t FROM Turnos t WHERE t.hora = :hora")})
 public class Turnos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id_turnos")
-    private Short idTurnos;
+    @Column(name = "idTurnos")
+    private Integer idTurnos;
     @Column(name = "turno")
     private String turno;
-    @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
-    @OneToMany(mappedBy = "idTurnos")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTurnos")
     private Collection<Especialidades> especialidadesCollection;
 
     public Turnos() {
     }
 
-    public Turnos(Short idTurnos) {
+    public Turnos(Integer idTurnos) {
         this.idTurnos = idTurnos;
     }
 
-    public Short getIdTurnos() {
+    public Integer getIdTurnos() {
         return idTurnos;
     }
 
-    public void setIdTurnos(Short idTurnos) {
+    public void setIdTurnos(Integer idTurnos) {
         this.idTurnos = idTurnos;
     }
 
@@ -73,14 +70,6 @@ public class Turnos implements Serializable {
 
     public void setTurno(String turno) {
         this.turno = turno;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public Date getHora() {
@@ -122,7 +111,7 @@ public class Turnos implements Serializable {
 
     @Override
     public String toString() {
-        return "domainchatbot.Turnos[ idTurnos=" + idTurnos + " ]";
+        return "domain.Turnos[ idTurnos=" + idTurnos + " ]";
     }
 
 }

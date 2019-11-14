@@ -2,7 +2,11 @@ package chatbot.prueba.dto;
 
 import chatbot.prueba.domain.Persona;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 public class PersonaDto {
 
@@ -13,6 +17,12 @@ public class PersonaDto {
     private Integer ci;
     private Integer telefono;
 
+//anadiendo mas campos
+    private int estatus;
+    private String txUser;
+    private String txHost;
+    private Date txDate;
+//fin
     public PersonaDto() {
     }
     public PersonaDto(Persona persona)
@@ -21,6 +31,12 @@ public class PersonaDto {
         this.apellidos = persona.getApellidos();
         this.ci = persona.getCi();
         this.telefono = persona.getTelefono();
+
+        //anadiendo
+        this.estatus = persona.getEstatus();
+        this.txUser = persona.getTxUser();
+        this.txHost = persona.getTxHost();
+        this.txDate = persona.getTxDate();
     }
 
 
@@ -62,5 +78,41 @@ public class PersonaDto {
 
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
+    }
+
+
+
+    //anadiendo gettes and setters
+
+    public int getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(int estatus) {
+        this.estatus = estatus;
+    }
+
+    public String getTxUser() {
+        return txUser;
+    }
+
+    public void setTxUser(String txUser) {
+        this.txUser = txUser;
+    }
+
+    public String getTxHost() {
+        return txHost;
+    }
+
+    public void setTxHost(String txHost) {
+        this.txHost = txHost;
+    }
+
+    public Date getTxDate() {
+        return txDate;
+    }
+
+    public void setTxDate(Date txDate) {
+        this.txDate = txDate;
     }
 }
