@@ -5,20 +5,22 @@
  */
 package chatbot.prueba.domain;
 
-        import java.io.Serializable;
-        import java.util.Date;
-        import javax.persistence.Basic;
-        import javax.persistence.Column;
-        import javax.persistence.Entity;
-        import javax.persistence.Id;
-        import javax.persistence.NamedQueries;
-        import javax.persistence.NamedQuery;
-        import javax.persistence.Table;
-        import javax.xml.bind.annotation.XmlRootElement;
-
-
-        import javax.persistence.Temporal;
-        import javax.persistence.TemporalType;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,21 +36,17 @@ package chatbot.prueba.domain;
         , @NamedQuery(name = "Persona.findByApellidos", query = "SELECT p FROM Persona p WHERE p.apellidos = :apellidos")
         , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
         , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-
-//anadiendo campos extras
-        ,@NamedQuery(name = "Persona.findByEstatus", query = "SELECT p FROM Persona p WHERE p.status = :status")
-        ,@NamedQuery(name = "Persona.findByTxUser", query = "SELECT p FROM Persona p WHERE p.txUser = :txUser")
-        ,@NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
-        ,@NamedQuery(name = "Persona.findByTxDate", query = "SELECT p FROM Persona p WHERE p.txDate = :txDate")})
-//fin
-
+        , @NamedQuery(name = "Persona.findByEstatus", query = "SELECT p FROM Persona p WHERE p.estatus = :estatus")
+        , @NamedQuery(name = "Persona.findByTxUsuario", query = "SELECT p FROM Persona p WHERE p.txUsuario = :txUsuario")
+        , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
+        , @NamedQuery(name = "Persona.findByTxFecha", query = "SELECT p FROM Persona p WHERE p.txFecha = :txFecha")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id_persona")
-    private Short idPersona;
+    @Column(name = "idPersona")
+    private Integer idPersona;
     @Column(name = "nombres")
     private String nombres;
     @Column(name = "apellidos")
@@ -57,46 +55,30 @@ public class Persona implements Serializable {
     private Integer ci;
     @Column(name = "telefono")
     private Integer telefono;
-
-//anadiendo campos extras
-    @Basic(optional = false)
     @Column(name = "estatus")
-    private int estatus;
-    @Basic(optional = false)
-    @Column(name = "tx_user")
-    private String txUser;
-    @Basic(optional = false)
+    private Integer estatus;
+    @Column(name = "tx_usuario")
+    private String txUsuario;
     @Column(name = "tx_host")
     private String txHost;
-    @Basic(optional = false)
-    @Column(name = "tx_date")
+    @Column(name = "tx_fecha")
     @Temporal(TemporalType.DATE)
-    private Date txDate;
-//fin
+    private Date txFecha;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersona")
+    private Collection<Usuarios> usuariosCollection;
 
     public Persona() {
     }
 
-    public Persona(Short idPersona) {
+    public Persona(Integer idPersona) {
         this.idPersona = idPersona;
     }
 
-    // anadiend constructor
-    public Persona(Short idPersona, String nombres, int estatus, String txUser, String txHost, Date txDate) {
-        this.idPersona = idPersona;
-        this.nombres = nombres;
-        this.estatus = estatus;
-        this.txUser = txUser;
-        this.txHost = txHost;
-        this.txDate = txDate;
-    }
-    //fin
-
-    public Short getIdPersona() {
+    public Integer getIdPersona() {
         return idPersona;
     }
 
-    public void setIdPersona(Short idPersona) {
+    public void setIdPersona(Integer idPersona) {
         this.idPersona = idPersona;
     }
 
@@ -132,21 +114,20 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-//anadiendo getters and setters
-    public int getEstatus() {
+    public Integer getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(int estatus) {
+    public void setEstatus(Integer estatus) {
         this.estatus = estatus;
     }
 
-    public String getTxUser() {
-        return txUser;
+    public String getTxUsuario() {
+        return txUsuario;
     }
 
-    public void setTxUser(String txUser) {
-        this.txUser = txUser;
+    public void setTxUsuario(String txUsuario) {
+        this.txUsuario = txUsuario;
     }
 
     public String getTxHost() {
@@ -157,15 +138,22 @@ public class Persona implements Serializable {
         this.txHost = txHost;
     }
 
-    public Date getTxDate() {
-        return txDate;
+    public Date getTxFecha() {
+        return txFecha;
     }
 
-    public void setTxDate(Date txDate) {
-        this.txDate = txDate;
+    public void setTxFecha(Date txFecha) {
+        this.txFecha = txFecha;
     }
-    //fin getters and setters
 
+    @XmlTransient
+    public Collection<Usuarios> getUsuariosCollection() {
+        return usuariosCollection;
+    }
+
+    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
+        this.usuariosCollection = usuariosCollection;
+    }
 
     @Override
     public int hashCode() {
@@ -173,7 +161,6 @@ public class Persona implements Serializable {
         hash += (idPersona != null ? idPersona.hashCode() : 0);
         return hash;
     }
-
 
     @Override
     public boolean equals(Object object) {
@@ -188,20 +175,9 @@ public class Persona implements Serializable {
         return true;
     }
 
-
-    //anadi mas campos en to string
     @Override
     public String toString() {
-        return "Persona{" +
-                "idPersona=" + idPersona +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", ci=" + ci +
-                ", telefono=" + telefono +
-                ", estatus=" + estatus +
-                ", txUser='" + txUser + '\'' +
-                ", txHost='" + txHost + '\'' +
-                ", txDate=" + txDate +
-                '}';
+        return "domain.Persona[ idPersona=" + idPersona + " ]";
     }
+
 }

@@ -5,18 +5,20 @@
  */
 package chatbot.prueba.domain;
 
-        import java.io.Serializable;
-        import java.util.Collection;
-        import javax.persistence.Basic;
-        import javax.persistence.Column;
-        import javax.persistence.Entity;
-        import javax.persistence.Id;
-        import javax.persistence.NamedQueries;
-        import javax.persistence.NamedQuery;
-        import javax.persistence.OneToMany;
-        import javax.persistence.Table;
-        import javax.xml.bind.annotation.XmlRootElement;
-        import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -30,35 +32,46 @@ package chatbot.prueba.domain;
         , @NamedQuery(name = "Medico.findByIdMedico", query = "SELECT m FROM Medico m WHERE m.idMedico = :idMedico")
         , @NamedQuery(name = "Medico.findByNombres", query = "SELECT m FROM Medico m WHERE m.nombres = :nombres")
         , @NamedQuery(name = "Medico.findByApellidos", query = "SELECT m FROM Medico m WHERE m.apellidos = :apellidos")
-        , @NamedQuery(name = "Medico.findByTel\u00e9fono", query = "SELECT m FROM Medico m WHERE m.tel\u00e9fono = :tel\u00e9fono")})
+        , @NamedQuery(name = "Medico.findByTelefono", query = "SELECT m FROM Medico m WHERE m.telefono = :telefono")
+        , @NamedQuery(name = "Medico.findByTxUsuario", query = "SELECT m FROM Medico m WHERE m.txUsuario = :txUsuario")
+        , @NamedQuery(name = "Medico.findByTxHost", query = "SELECT m FROM Medico m WHERE m.txHost = :txHost")
+        , @NamedQuery(name = "Medico.findByTxFecha", query = "SELECT m FROM Medico m WHERE m.txFecha = :txFecha")})
 public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id_medico")
-    private Short idMedico;
+    @Column(name = "idMedico")
+    private Integer idMedico;
     @Column(name = "nombres")
     private String nombres;
     @Column(name = "apellidos")
     private String apellidos;
-    @Column(name = "tel\u00e9fono")
-    private Integer teléfono;
-    @OneToMany(mappedBy = "idMedico")
-    private Collection<MedicoEspecialidad> medicoEspecialidadCollection;
+    @Column(name = "telefono")
+    private Integer telefono;
+    @Column(name = "tx_usuario")
+    private String txUsuario;
+    @Column(name = "tx_host")
+    private String txHost;
+    @Column(name = "tx_fecha")
+    @Temporal(TemporalType.DATE)
+    private Date txFecha;
+    @JoinColumn(name = "idEspecialidades", referencedColumnName = "idEspecialidades")
+    @ManyToOne(optional = false)
+    private Especialidades idEspecialidades;
 
     public Medico() {
     }
 
-    public Medico(Short idMedico) {
+    public Medico(Integer idMedico) {
         this.idMedico = idMedico;
     }
 
-    public Short getIdMedico() {
+    public Integer getIdMedico() {
         return idMedico;
     }
 
-    public void setIdMedico(Short idMedico) {
+    public void setIdMedico(Integer idMedico) {
         this.idMedico = idMedico;
     }
 
@@ -78,21 +91,44 @@ public class Medico implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public Integer getTeléfono() {
-        return teléfono;
+    public Integer getTelefono() {
+        return telefono;
     }
 
-    public void setTeléfono(Integer teléfono) {
-        this.teléfono = teléfono;
+    public void setTelefono(Integer telefono) {
+        this.telefono = telefono;
     }
 
-    @XmlTransient
-    public Collection<MedicoEspecialidad> getMedicoEspecialidadCollection() {
-        return medicoEspecialidadCollection;
+    public String getTxUsuario() {
+        return txUsuario;
     }
 
-    public void setMedicoEspecialidadCollection(Collection<MedicoEspecialidad> medicoEspecialidadCollection) {
-        this.medicoEspecialidadCollection = medicoEspecialidadCollection;
+    public void setTxUsuario(String txUsuario) {
+        this.txUsuario = txUsuario;
+    }
+
+    public String getTxHost() {
+        return txHost;
+    }
+
+    public void setTxHost(String txHost) {
+        this.txHost = txHost;
+    }
+
+    public Date getTxFecha() {
+        return txFecha;
+    }
+
+    public void setTxFecha(Date txFecha) {
+        this.txFecha = txFecha;
+    }
+
+    public Especialidades getIdEspecialidades() {
+        return idEspecialidades;
+    }
+
+    public void setIdEspecialidades(Especialidades idEspecialidades) {
+        this.idEspecialidades = idEspecialidades;
     }
 
     @Override
@@ -117,7 +153,7 @@ public class Medico implements Serializable {
 
     @Override
     public String toString() {
-        return "domainchatbot.Medico[ idMedico=" + idMedico + " ]";
+        return "domain.Medico[ idMedico=" + idMedico + " ]";
     }
 
 }
