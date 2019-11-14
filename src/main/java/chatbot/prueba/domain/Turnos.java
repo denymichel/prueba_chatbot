@@ -30,10 +30,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "turnos")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t")
-        , @NamedQuery(name = "Turnos.findByIdTurnos", query = "SELECT t FROM Turnos t WHERE t.idTurnos = :idTurnos")
-        , @NamedQuery(name = "Turnos.findByTurno", query = "SELECT t FROM Turnos t WHERE t.turno = :turno")
-        , @NamedQuery(name = "Turnos.findByHora", query = "SELECT t FROM Turnos t WHERE t.hora = :hora")})
+    @NamedQuery(name = "Turnos.findAll", query = "SELECT t FROM Turnos t")
+    , @NamedQuery(name = "Turnos.findByIdTurnos", query = "SELECT t FROM Turnos t WHERE t.idTurnos = :idTurnos")
+    , @NamedQuery(name = "Turnos.findByTurno", query = "SELECT t FROM Turnos t WHERE t.turno = :turno")
+    , @NamedQuery(name = "Turnos.findByHora", query = "SELECT t FROM Turnos t WHERE t.hora = :hora")})
 public class Turnos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -111,7 +111,7 @@ public class Turnos implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Turnos[ idTurnos=" + idTurnos + " ]";
+        return "cenmed.Turnos[ idTurnos=" + idTurnos + " ]";
     }
-
+    
 }

@@ -32,25 +32,25 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "usuarios")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
-        , @NamedQuery(name = "Usuarios.findByIdUsuarios", query = "SELECT u FROM Usuarios u WHERE u.idUsuarios = :idUsuarios")
-        , @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario")
-        , @NamedQuery(name = "Usuarios.findByPassword", query = "SELECT u FROM Usuarios u WHERE u.password = :password")
-        , @NamedQuery(name = "Usuarios.findByEstatus", query = "SELECT u FROM Usuarios u WHERE u.estatus = :estatus")
-        , @NamedQuery(name = "Usuarios.findByTxUsuario", query = "SELECT u FROM Usuarios u WHERE u.txUsuario = :txUsuario")
-        , @NamedQuery(name = "Usuarios.findByTxHost", query = "SELECT u FROM Usuarios u WHERE u.txHost = :txHost")
-        , @NamedQuery(name = "Usuarios.findByTxFecha", query = "SELECT u FROM Usuarios u WHERE u.txFecha = :txFecha")})
+    @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u")
+    , @NamedQuery(name = "Usuarios.findByIdusuarios", query = "SELECT u FROM Usuarios u WHERE u.idusuarios = :idusuarios")
+    , @NamedQuery(name = "Usuarios.findByUsuario", query = "SELECT u FROM Usuarios u WHERE u.usuario = :usuario")
+    , @NamedQuery(name = "Usuarios.findByContrasena", query = "SELECT u FROM Usuarios u WHERE u.contrasena = :contrasena")
+    , @NamedQuery(name = "Usuarios.findByEstatus", query = "SELECT u FROM Usuarios u WHERE u.estatus = :estatus")
+    , @NamedQuery(name = "Usuarios.findByTxUsuario", query = "SELECT u FROM Usuarios u WHERE u.txUsuario = :txUsuario")
+    , @NamedQuery(name = "Usuarios.findByTxHost", query = "SELECT u FROM Usuarios u WHERE u.txHost = :txHost")
+    , @NamedQuery(name = "Usuarios.findByTxFecha", query = "SELECT u FROM Usuarios u WHERE u.txFecha = :txFecha")})
 public class Usuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idUsuarios")
-    private Integer idUsuarios;
+    @Column(name = "Id_usuarios")
+    private Integer idusuarios;
     @Column(name = "usuario")
     private String usuario;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "contrasena")
+    private String contrasena;
     @Column(name = "estatus")
     private Integer estatus;
     @Column(name = "tx_usuario")
@@ -64,23 +64,23 @@ public class Usuarios implements Serializable {
     private Collection<Reservas> reservasCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuarios")
     private Collection<Imagen> imagenCollection;
-    @JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
+    @JoinColumn(name = "id_persona", referencedColumnName = "Id_persona")
     @ManyToOne(optional = false)
     private Persona idPersona;
 
     public Usuarios() {
     }
 
-    public Usuarios(Integer idUsuarios) {
-        this.idUsuarios = idUsuarios;
+    public Usuarios(Integer idusuarios) {
+        this.idusuarios = idusuarios;
     }
 
-    public Integer getIdUsuarios() {
-        return idUsuarios;
+    public Integer getIdusuarios() {
+        return idusuarios;
     }
 
-    public void setIdUsuarios(Integer idUsuarios) {
-        this.idUsuarios = idUsuarios;
+    public void setIdusuarios(Integer idusuarios) {
+        this.idusuarios = idusuarios;
     }
 
     public String getUsuario() {
@@ -91,12 +91,12 @@ public class Usuarios implements Serializable {
         this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public Integer getEstatus() {
@@ -160,7 +160,7 @@ public class Usuarios implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuarios != null ? idUsuarios.hashCode() : 0);
+        hash += (idusuarios != null ? idusuarios.hashCode() : 0);
         return hash;
     }
 
@@ -171,7 +171,7 @@ public class Usuarios implements Serializable {
             return false;
         }
         Usuarios other = (Usuarios) object;
-        if ((this.idUsuarios == null && other.idUsuarios != null) || (this.idUsuarios != null && !this.idUsuarios.equals(other.idUsuarios))) {
+        if ((this.idusuarios == null && other.idusuarios != null) || (this.idusuarios != null && !this.idusuarios.equals(other.idusuarios))) {
             return false;
         }
         return true;
@@ -179,7 +179,7 @@ public class Usuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Usuarios[ idUsuarios=" + idUsuarios + " ]";
+        return "cenmed.Usuarios[ idusuarios=" + idusuarios + " ]";
     }
-
+    
 }

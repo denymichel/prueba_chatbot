@@ -29,9 +29,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "especialidades")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Especialidades.findAll", query = "SELECT e FROM Especialidades e")
-        , @NamedQuery(name = "Especialidades.findByIdEspecialidades", query = "SELECT e FROM Especialidades e WHERE e.idEspecialidades = :idEspecialidades")
-        , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")})
+    @NamedQuery(name = "Especialidades.findAll", query = "SELECT e FROM Especialidades e")
+    , @NamedQuery(name = "Especialidades.findByIdEspecialidades", query = "SELECT e FROM Especialidades e WHERE e.idEspecialidades = :idEspecialidades")
+    , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")})
 public class Especialidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -120,7 +120,7 @@ public class Especialidades implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Especialidades[ idEspecialidades=" + idEspecialidades + " ]";
+        return "cenmed.Especialidades[ idEspecialidades=" + idEspecialidades + " ]";
     }
-
+    
 }

@@ -30,23 +30,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "persona")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-        , @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona")
-        , @NamedQuery(name = "Persona.findByNombres", query = "SELECT p FROM Persona p WHERE p.nombres = :nombres")
-        , @NamedQuery(name = "Persona.findByApellidos", query = "SELECT p FROM Persona p WHERE p.apellidos = :apellidos")
-        , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
-        , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-        , @NamedQuery(name = "Persona.findByEstatus", query = "SELECT p FROM Persona p WHERE p.estatus = :estatus")
-        , @NamedQuery(name = "Persona.findByTxUsuario", query = "SELECT p FROM Persona p WHERE p.txUsuario = :txUsuario")
-        , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
-        , @NamedQuery(name = "Persona.findByTxFecha", query = "SELECT p FROM Persona p WHERE p.txFecha = :txFecha")})
+    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
+    , @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona")
+    , @NamedQuery(name = "Persona.findByNombres", query = "SELECT p FROM Persona p WHERE p.nombres = :nombres")
+    , @NamedQuery(name = "Persona.findByApellidos", query = "SELECT p FROM Persona p WHERE p.apellidos = :apellidos")
+    , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
+    , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
+    , @NamedQuery(name = "Persona.findByEstatus", query = "SELECT p FROM Persona p WHERE p.estatus = :estatus")
+    , @NamedQuery(name = "Persona.findByTxUsuario", query = "SELECT p FROM Persona p WHERE p.txUsuario = :txUsuario")
+    , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
+    , @NamedQuery(name = "Persona.findByTxFecha", query = "SELECT p FROM Persona p WHERE p.txFecha = :txFecha")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "idPersona")
-    private Integer idPersona;
+    @Column(name = "Id_persona")
+    private Integer idpersona;
     @Column(name = "nombres")
     private String nombres;
     @Column(name = "apellidos")
@@ -70,16 +70,16 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public Persona(Integer idpersona) {
+        this.idpersona = idpersona;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public Integer getIdpersona() {
+        return idpersona;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setIdpersona(Integer idpersona) {
+        this.idpersona = idpersona;
     }
 
     public String getNombres() {
@@ -158,7 +158,7 @@ public class Persona implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idPersona != null ? idPersona.hashCode() : 0);
+        hash += (idpersona != null ? idpersona.hashCode() : 0);
         return hash;
     }
 
@@ -169,7 +169,7 @@ public class Persona implements Serializable {
             return false;
         }
         Persona other = (Persona) object;
-        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
+        if ((this.idpersona == null && other.idpersona != null) || (this.idpersona != null && !this.idpersona.equals(other.idpersona))) {
             return false;
         }
         return true;
@@ -177,6 +177,16 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Persona[ idPersona=" + idPersona + " ]";
+        return "Persona{" +
+                "idpersona=" + idpersona +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", ci=" + ci +
+                ", telefono=" + telefono +
+                ", estatus=" + estatus +
+                ", txUsuario='" + txUsuario + '\'' +
+                ", txHost='" + txHost + '\'' +
+                ", txFecha=" + txFecha +
+                '}';
     }
 }

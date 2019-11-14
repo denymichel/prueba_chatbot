@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package chatbot.prueba.domain;
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -27,12 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "reservas")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Reservas.findAll", query = "SELECT r FROM Reservas r")
-        , @NamedQuery(name = "Reservas.findByIdReservas", query = "SELECT r FROM Reservas r WHERE r.idReservas = :idReservas")
-        , @NamedQuery(name = "Reservas.findByFechaHora", query = "SELECT r FROM Reservas r WHERE r.fechaHora = :fechaHora")
-        , @NamedQuery(name = "Reservas.findByTxUsuario", query = "SELECT r FROM Reservas r WHERE r.txUsuario = :txUsuario")
-        , @NamedQuery(name = "Reservas.findByTxHost", query = "SELECT r FROM Reservas r WHERE r.txHost = :txHost")
-        , @NamedQuery(name = "Reservas.findByTxFecha", query = "SELECT r FROM Reservas r WHERE r.txFecha = :txFecha")})
+    @NamedQuery(name = "Reservas.findAll", query = "SELECT r FROM Reservas r")
+    , @NamedQuery(name = "Reservas.findByIdReservas", query = "SELECT r FROM Reservas r WHERE r.idReservas = :idReservas")
+    , @NamedQuery(name = "Reservas.findByFechaHora", query = "SELECT r FROM Reservas r WHERE r.fechaHora = :fechaHora")
+    , @NamedQuery(name = "Reservas.findByTxUsuario", query = "SELECT r FROM Reservas r WHERE r.txUsuario = :txUsuario")
+    , @NamedQuery(name = "Reservas.findByTxHost", query = "SELECT r FROM Reservas r WHERE r.txHost = :txHost")
+    , @NamedQuery(name = "Reservas.findByTxFecha", query = "SELECT r FROM Reservas r WHERE r.txFecha = :txFecha")})
 public class Reservas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,7 +51,7 @@ public class Reservas implements Serializable {
     @Column(name = "tx_fecha")
     @Temporal(TemporalType.DATE)
     private Date txFecha;
-    @JoinColumn(name = "idUsuarios", referencedColumnName = "idUsuarios")
+    @JoinColumn(name = "id_usuarios", referencedColumnName = "Id_usuarios")
     @ManyToOne(optional = false)
     private Usuarios idUsuarios;
     @JoinColumn(name = "idEspecialidades", referencedColumnName = "idEspecialidades")
@@ -142,7 +143,7 @@ public class Reservas implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Reservas[ idReservas=" + idReservas + " ]";
+        return "cenmed.Reservas[ idReservas=" + idReservas + " ]";
     }
-
+    
 }

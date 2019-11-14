@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "medico")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Medico.findAll", query = "SELECT m FROM Medico m")
-        , @NamedQuery(name = "Medico.findByIdMedico", query = "SELECT m FROM Medico m WHERE m.idMedico = :idMedico")
-        , @NamedQuery(name = "Medico.findByNombres", query = "SELECT m FROM Medico m WHERE m.nombres = :nombres")
-        , @NamedQuery(name = "Medico.findByApellidos", query = "SELECT m FROM Medico m WHERE m.apellidos = :apellidos")
-        , @NamedQuery(name = "Medico.findByTelefono", query = "SELECT m FROM Medico m WHERE m.telefono = :telefono")
-        , @NamedQuery(name = "Medico.findByTxUsuario", query = "SELECT m FROM Medico m WHERE m.txUsuario = :txUsuario")
-        , @NamedQuery(name = "Medico.findByTxHost", query = "SELECT m FROM Medico m WHERE m.txHost = :txHost")
-        , @NamedQuery(name = "Medico.findByTxFecha", query = "SELECT m FROM Medico m WHERE m.txFecha = :txFecha")})
+    @NamedQuery(name = "Medico.findAll", query = "SELECT m FROM Medico m")
+    , @NamedQuery(name = "Medico.findByIdMedico", query = "SELECT m FROM Medico m WHERE m.idMedico = :idMedico")
+    , @NamedQuery(name = "Medico.findByNombres", query = "SELECT m FROM Medico m WHERE m.nombres = :nombres")
+    , @NamedQuery(name = "Medico.findByApellidos", query = "SELECT m FROM Medico m WHERE m.apellidos = :apellidos")
+    , @NamedQuery(name = "Medico.findByTelefono", query = "SELECT m FROM Medico m WHERE m.telefono = :telefono")
+    , @NamedQuery(name = "Medico.findByTxUsuario", query = "SELECT m FROM Medico m WHERE m.txUsuario = :txUsuario")
+    , @NamedQuery(name = "Medico.findByTxHost", query = "SELECT m FROM Medico m WHERE m.txHost = :txHost")
+    , @NamedQuery(name = "Medico.findByTxFecha", query = "SELECT m FROM Medico m WHERE m.txFecha = :txFecha")})
 public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -153,7 +153,7 @@ public class Medico implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Medico[ idMedico=" + idMedico + " ]";
+        return "cenmed.Medico[ idMedico=" + idMedico + " ]";
     }
-
+    
 }

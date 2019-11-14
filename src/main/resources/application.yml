@@ -3,7 +3,7 @@ spring:
     name: chatbot
   datasource:
     platform: mysql
-    url: jdbc:mysql://localhost:3306/cen_med?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/cenmed?serverTimezone=UTC
     username: root
     password:
   jpa:

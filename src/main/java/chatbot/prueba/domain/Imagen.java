@@ -1,4 +1,3 @@
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,11 +26,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "imagen")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Imagen.findAll", query = "SELECT i FROM Imagen i")
-        , @NamedQuery(name = "Imagen.findByIdimagen", query = "SELECT i FROM Imagen i WHERE i.idimagen = :idimagen")
-        , @NamedQuery(name = "Imagen.findByTxUsuario", query = "SELECT i FROM Imagen i WHERE i.txUsuario = :txUsuario")
-        , @NamedQuery(name = "Imagen.findByTxHost", query = "SELECT i FROM Imagen i WHERE i.txHost = :txHost")
-        , @NamedQuery(name = "Imagen.findByTxFecha", query = "SELECT i FROM Imagen i WHERE i.txFecha = :txFecha")})
+    @NamedQuery(name = "Imagen.findAll", query = "SELECT i FROM Imagen i")
+    , @NamedQuery(name = "Imagen.findByIdimagen", query = "SELECT i FROM Imagen i WHERE i.idimagen = :idimagen")
+    , @NamedQuery(name = "Imagen.findByTxUsuario", query = "SELECT i FROM Imagen i WHERE i.txUsuario = :txUsuario")
+    , @NamedQuery(name = "Imagen.findByTxHost", query = "SELECT i FROM Imagen i WHERE i.txHost = :txHost")
+    , @NamedQuery(name = "Imagen.findByTxFecha", query = "SELECT i FROM Imagen i WHERE i.txFecha = :txFecha")})
 public class Imagen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,7 +47,7 @@ public class Imagen implements Serializable {
     private String txHost;
     @Column(name = "tx_fecha")
     private String txFecha;
-    @JoinColumn(name = "idUsuarios", referencedColumnName = "idUsuarios")
+    @JoinColumn(name = "id_usuarios", referencedColumnName = "Id_usuarios")
     @ManyToOne(optional = false)
     private Usuarios idUsuarios;
 
@@ -129,7 +128,7 @@ public class Imagen implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.Imagen[ idimagen=" + idimagen + " ]";
+        return "cenmed.Imagen[ idimagen=" + idimagen + " ]";
     }
-
+    
 }
