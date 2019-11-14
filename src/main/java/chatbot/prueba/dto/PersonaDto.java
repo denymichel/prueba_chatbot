@@ -15,13 +15,14 @@ public class PersonaDto {
 
     public PersonaDto() {
     }
-
-    public PersonaDto(Persona persona) {
+    public PersonaDto(Persona persona)
+    {
         this.nombres = persona.getNombres();
         this.apellidos = persona.getApellidos();
         this.ci = persona.getCi();
         this.telefono = persona.getTelefono();
     }
+
 
     public Short getIdPersona() {
         return idPersona;
