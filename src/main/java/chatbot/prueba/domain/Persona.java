@@ -179,5 +179,4 @@ public class Persona implements Serializable {
     public String toString() {
         return "domain.Persona[ idPersona=" + idPersona + " ]";
     }
-
 }
