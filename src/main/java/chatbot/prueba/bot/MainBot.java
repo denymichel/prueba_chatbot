@@ -3,9 +3,16 @@ package chatbot.prueba.bot;
         import chatbot.prueba.dao.PersonRepository;
         import chatbot.prueba.domain.Persona;
         import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+        import org.telegram.telegrambots.meta.api.objects.Message;
         import org.telegram.telegrambots.meta.api.objects.Update;
         import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
+        import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
         import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+        import java.util.ArrayList;
+        import java.util.List;
 
 
 public class MainBot extends TelegramLongPollingBot{
@@ -16,16 +23,6 @@ public class MainBot extends TelegramLongPollingBot{
         this.personRepository = personRepository;
     }
 
-    /** ponemos el codigo en la clase BotInitializator
-    public static void main (String[] args) {
-        ApiContextInitializer.init();
-        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try { telegramBotsApi.registerBot(new MainBot());
-        } catch (TelegramApiRequestException e) {
-            e.printStackTrace();
-        }
-    }
-*/
 /**
     public void sendMsg(Message message, String text){
         SendMessage sendMessage = new SendMessage();
@@ -71,7 +68,6 @@ public class MainBot extends TelegramLongPollingBot{
         if (update.hasMessage() && update.getMessage().hasText()) {
             Persona persona= personRepository.findById(1).get();        //sacamos la persona con id 1 de la BD
           //  CpPerson cpPerson = customerBl.findPersonById(1);
-            // customerBl.
             SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
                     .setChatId(update.getMessage().getChatId())
                     .setText("Persona desde base de datos: "+ persona);
@@ -82,6 +78,28 @@ public class MainBot extends TelegramLongPollingBot{
                 e.printStackTrace();
             }
         }
+
+        //
+        Message message1 = update.getMessage();
+        if (message1 != null && message1.hasText()) {
+            switch (message1.getText()) {
+                case "/inicio":
+                    sendMsg(message1, "Hola soy el asistente automatico, en que te puedo ayudar?");
+                    break;
+                case "/ReservarCitaMedica":
+                    sendMsg(message1, "Porfavor seleccione una especialidad       " );
+                    sendMsg(message1,      "/MedicinaGeneral      " +
+                            "/Pediatria         " +
+                            "/Traumatologia     ");
+                    break;
+                case "/VerEspecialidades":
+                    sendMsg(message1, "/MedicinaGeneral");
+                    sendMsg(message1, "/Pediatria");
+                    sendMsg(message1, "/Traumatologia");
+                default:
+            }
+        }
+        //
     }
 /**
     public void setButtons(SendMessage sendMessage){
@@ -110,6 +128,25 @@ public class MainBot extends TelegramLongPollingBot{
     public String getBotToken() {
         return "965898434:AAFYisxZkAsAWykdChxs9DNy1ceCADAmogo";
     }
+
+
+
+
+    // //////////////////////////////////////////////
+    public void sendMsg(Message message, String text) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(true);
+        sendMessage.setChatId(message.getChatId().toString());
+        sendMessage.setReplyToMessageId(message.getMessageId());
+        sendMessage.setText(text);
+        try {
+            this.execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
