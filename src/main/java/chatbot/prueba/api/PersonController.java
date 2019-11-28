@@ -1,5 +1,6 @@
 package chatbot.prueba.api;
 
+import chatbot.prueba.bl.PersonaBl;
 import chatbot.prueba.dao.PersonRepository;
 
 import chatbot.prueba.domain.Persona;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/persona")
+@RequestMapping("persona")
 public class PersonController {
 
     private PersonRepository personRepository;
@@ -31,11 +32,11 @@ public class PersonController {
                     produces = MediaType.APPLICATION_JSON_VALUE)
 
     List<PersonaDto> all() {
-        List<PersonaDto> personaDtoList =new ArrayList<>();
-        for(Persona persona:personRepository.findAll()){
-               personaDtoList.add(new PersonaDto(persona));
+        List<PersonaDto> personDtoList =new ArrayList<>();
+        for(Persona persona : personRepository.findAll()){
+               personDtoList.add(new PersonaDto(persona));
         }
-        return personaDtoList;
+        return personDtoList;
     }
 
 

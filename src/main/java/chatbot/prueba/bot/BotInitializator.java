@@ -1,5 +1,7 @@
 package chatbot.prueba.bot;
 
+import chatbot.prueba.bl.BotBl;
+import chatbot.prueba.bl.PersonaBl;
 import chatbot.prueba.dao.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,23 +15,23 @@ import javax.annotation.PostConstruct;
 @Component
 public class BotInitializator {
 
-    PersonRepository personRepository;
-    @Autowired
-    public BotInitializator(PersonRepository personRepository) {
-        this.personRepository = personRepository;
-    }
+  BotBl botBl;
 
+    @Autowired
+    public BotInitializator(BotBl botBl) {
+        this.botBl = botBl;
+    }
 
     public BotInitializator() {
     }
-
 
     //en el metodo init inicia nuestro chatbot
     @PostConstruct
     public void init() {
         ApiContextInitializer.init();
         TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
-        try { telegramBotsApi.registerBot(new MainBot(personRepository));
+        try {
+            telegramBotsApi.registerBot(new MainBot(botBl));
         } catch (TelegramApiRequestException e) {
             e.printStackTrace();
         }

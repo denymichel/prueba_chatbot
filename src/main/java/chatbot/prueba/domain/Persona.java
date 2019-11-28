@@ -174,19 +174,10 @@ public class Persona implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
-        return "Persona{" +
-                "idpersona=" + idpersona +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", ci=" + ci +
-                ", telefono=" + telefono +
-                ", estatus=" + estatus +
-                ", txUsuario='" + txUsuario + '\'' +
-                ", txHost='" + txHost + '\'' +
-                ", txFecha=" + txFecha +
-                '}';
+        return "cenmed.Persona[ idpersona=" + idpersona + " ]";
     }
+
+
 }
