@@ -197,9 +197,9 @@ public class Persona implements Serializable {
         }
         return true;
     }
-
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "Persona{" +
                 "idpersona=" + idpersona +
                 ", nombre='" + nombre + '\'' +
@@ -211,5 +211,10 @@ public class Persona implements Serializable {
                 ", txHost='" + txHost + '\'' +
                 ", txDate=" + txDate +
                 '}';
+=======
+        return "cenmed.Persona[ idpersona=" + idpersona + " ]";
+>>>>>>> 060885ac40bae611f39cd8437e2c57db2341dc7a
     }
+
+
 }

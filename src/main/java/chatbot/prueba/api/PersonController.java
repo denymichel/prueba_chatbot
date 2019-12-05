@@ -1,6 +1,10 @@
 package chatbot.prueba.api;
 
 import chatbot.prueba.bl.PersonaBl;
+<<<<<<< HEAD
+=======
+import chatbot.prueba.dao.PersonRepository;
+>>>>>>> 060885ac40bae611f39cd8437e2c57db2341dc7a
 
 import chatbot.prueba.dto.PersonaDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/persona")
+@RequestMapping("persona")
 public class PersonController {
 
     private PersonaBl personaBl;
@@ -34,10 +38,18 @@ public class PersonController {
                     produces = MediaType.APPLICATION_JSON_VALUE)
 
     List<PersonaDto> all() {
+<<<<<<< HEAD
 
 
 
         return personaBl.findAllPeople();
+=======
+        List<PersonaDto> personDtoList =new ArrayList<>();
+        for(Persona persona : personRepository.findAll()){
+               personDtoList.add(new PersonaDto(persona));
+        }
+        return personDtoList;
+>>>>>>> 060885ac40bae611f39cd8437e2c57db2341dc7a
     }
 
 
