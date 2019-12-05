@@ -32,16 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "persona")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-    , @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona")
-    , @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido")
-    , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
-    , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-    , @NamedQuery(name = "Persona.findByStatus", query = "SELECT p FROM Persona p WHERE p.status = :status")
-    , @NamedQuery(name = "Persona.findByTxUser", query = "SELECT p FROM Persona p WHERE p.txUser = :txUser")
-    , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
-    , @NamedQuery(name = "Persona.findByTxDate", query = "SELECT p FROM Persona p WHERE p.txDate = :txDate")})
+        @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
+        , @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona")
+        , @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre")
+        , @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido")
+        , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
+        , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
+        , @NamedQuery(name = "Persona.findByStatus", query = "SELECT p FROM Persona p WHERE p.status = :status")
+        , @NamedQuery(name = "Persona.findByTxUser", query = "SELECT p FROM Persona p WHERE p.txUser = :txUser")
+        , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
+        , @NamedQuery(name = "Persona.findByTxDate", query = "SELECT p FROM Persona p WHERE p.txDate = :txDate")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -197,9 +197,9 @@ public class Persona implements Serializable {
         }
         return true;
     }
+
     @Override
     public String toString() {
-<<<<<<< HEAD
         return "Persona{" +
                 "idpersona=" + idpersona +
                 ", nombre='" + nombre + '\'' +
@@ -211,10 +211,5 @@ public class Persona implements Serializable {
                 ", txHost='" + txHost + '\'' +
                 ", txDate=" + txDate +
                 '}';
-=======
-        return "cenmed.Persona[ idpersona=" + idpersona + " ]";
->>>>>>> 060885ac40bae611f39cd8437e2c57db2341dc7a
     }
-
-
 }
