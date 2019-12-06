@@ -2,8 +2,6 @@ package chatbot.prueba.dto;
 
 import chatbot.prueba.domain.Persona;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
 import java.util.List;
 
 public class PersonaDto {

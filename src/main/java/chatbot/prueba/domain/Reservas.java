@@ -63,12 +63,12 @@ public class Reservas implements Serializable {
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
-    @JoinColumn(name = "especialidades_idespecialidades", referencedColumnName = "idespecialidades")
+    @JoinColumn(name = "idespecialidades", referencedColumnName = "idespecialidades")
     @ManyToOne(optional = false)
-    private Especialidades especialidadesIdespecialidades;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    private Especialidades idespecialidades;
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuario usuarioIdusuario;
+    private Usuario idusuario;
 
     public Reservas() {
     }
@@ -134,20 +134,20 @@ public class Reservas implements Serializable {
         this.txDate = txDate;
     }
 
-    public Especialidades getEspecialidadesIdespecialidades() {
-        return especialidadesIdespecialidades;
+    public Especialidades getIdespecialidades() {
+        return idespecialidades;
     }
 
-    public void setEspecialidadesIdespecialidades(Especialidades especialidadesIdespecialidades) {
-        this.especialidadesIdespecialidades = especialidadesIdespecialidades;
+    public void setIdespecialidades(Especialidades idespecialidades) {
+        this.idespecialidades = idespecialidades;
     }
 
-    public Usuario getUsuarioIdusuario() {
-        return usuarioIdusuario;
+    public Usuario getIdusuario() {
+        return idusuario;
     }
 
-    public void setUsuarioIdusuario(Usuario usuarioIdusuario) {
-        this.usuarioIdusuario = usuarioIdusuario;
+    public void setIdusuario(Usuario idusuario) {
+        this.idusuario = idusuario;
     }
 
     @Override
@@ -172,7 +172,7 @@ public class Reservas implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Reservas[ idreservas=" + idreservas + " ]";
+        return "chatbotuno.Reservas[ idreservas=" + idreservas + " ]";
     }
     
 }

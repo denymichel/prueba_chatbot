@@ -5,6 +5,7 @@
     <class>chatbot.prueba.domain.Archivo</class>
     <class>chatbot.prueba.domain.Chat</class>
     <class>chatbot.prueba.domain.Especialidades</class>
+    <class>chatbot.prueba.domain.EspecialidadHorario</class>
     <class>chatbot.prueba.domain.Horarios</class>
     <class>chatbot.prueba.domain.Medico</class>
     <class>chatbot.prueba.domain.Persona</class>
@@ -12,7 +13,7 @@
     <class>chatbot.prueba.domain.Usuario</class>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:15432/chatbot"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:15432/chatbotuno"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="postgres"/>

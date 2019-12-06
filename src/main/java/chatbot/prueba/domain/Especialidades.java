@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Especialidades.findAll", query = "SELECT e FROM Especialidades e")
     , @NamedQuery(name = "Especialidades.findByIdespecialidades", query = "SELECT e FROM Especialidades e WHERE e.idespecialidades = :idespecialidades")
-    , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")})
+    , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")
+    , @NamedQuery(name = "Especialidades.findByPrecioConsulta", query = "SELECT e FROM Especialidades e WHERE e.precioConsulta = :precioConsulta")})
 public class Especialidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,13 +44,15 @@ public class Especialidades implements Serializable {
     @Basic(optional = false)
     @Column(name = "especialidad")
     private String especialidad;
-    @JoinColumn(name = "horarios_idhorarios", referencedColumnName = "idhorarios")
-    @ManyToOne(optional = false)
-    private Horarios horariosIdhorarios;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidadesIdespecialidades")
+    @Basic(optional = false)
+    @Column(name = "precio_consulta")
+    private String precioConsulta;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idespecialidades")
     private Collection<Reservas> reservasCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidadesIdespecialidades")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idespecialidades")
     private Collection<Medico> medicoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idespecialidades")
+    private Collection<EspecialidadHorario> especialidadHorarioCollection;
 
     public Especialidades() {
     }
@@ -60,9 +61,10 @@ public class Especialidades implements Serializable {
         this.idespecialidades = idespecialidades;
     }
 
-    public Especialidades(Integer idespecialidades, String especialidad) {
+    public Especialidades(Integer idespecialidades, String especialidad, String precioConsulta) {
         this.idespecialidades = idespecialidades;
         this.especialidad = especialidad;
+        this.precioConsulta = precioConsulta;
     }
 
     public Integer getIdespecialidades() {
@@ -81,12 +83,12 @@ public class Especialidades implements Serializable {
         this.especialidad = especialidad;
     }
 
-    public Horarios getHorariosIdhorarios() {
-        return horariosIdhorarios;
+    public String getPrecioConsulta() {
+        return precioConsulta;
     }
 
-    public void setHorariosIdhorarios(Horarios horariosIdhorarios) {
-        this.horariosIdhorarios = horariosIdhorarios;
+    public void setPrecioConsulta(String precioConsulta) {
+        this.precioConsulta = precioConsulta;
     }
 
     @XmlTransient
@@ -105,6 +107,15 @@ public class Especialidades implements Serializable {
 
     public void setMedicoCollection(Collection<Medico> medicoCollection) {
         this.medicoCollection = medicoCollection;
+    }
+
+    @XmlTransient
+    public Collection<EspecialidadHorario> getEspecialidadHorarioCollection() {
+        return especialidadHorarioCollection;
+    }
+
+    public void setEspecialidadHorarioCollection(Collection<EspecialidadHorario> especialidadHorarioCollection) {
+        this.especialidadHorarioCollection = especialidadHorarioCollection;
     }
 
     @Override
@@ -129,7 +140,7 @@ public class Especialidades implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Especialidades[ idespecialidades=" + idespecialidades + " ]";
+        return "chatbotuno.Especialidades[ idespecialidades=" + idespecialidades + " ]";
     }
     
 }

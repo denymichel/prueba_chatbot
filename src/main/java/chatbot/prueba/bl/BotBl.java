@@ -1,11 +1,22 @@
 package chatbot.prueba.bl;
 
+import chatbot.prueba.dao.ChatRepository;
 import chatbot.prueba.dao.PersonRepository;
 import chatbot.prueba.dao.UsuariosRepository;
+import chatbot.prueba.domain.Chat;
+import chatbot.prueba.domain.Persona;
+import chatbot.prueba.domain.Usuario;
+import chatbot.prueba.dto.Estatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.User;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class BotBl {
@@ -16,119 +27,112 @@ public class BotBl {
     //anadimos repositorios usuarios, persona,
     private UsuariosRepository usuariosRepository;
     private PersonRepository personRepository;
+    private ChatRepository chatRepository;
 
     @Autowired
-    public BotBl(UsuariosRepository usuariosRepository, PersonRepository personRepository) {
+    public BotBl(UsuariosRepository usuariosRepository, PersonRepository personRepository, ChatRepository chatRepository) {
         this.usuariosRepository = usuariosRepository;
         this.personRepository = personRepository;
+        this.chatRepository = chatRepository;
     }
 
 
 
 
 
-/**
+
  //This method process and update when a user is send a message to the chatbot
- public int processUpdate(Update update){
- LOGGER.info("Receiving an update from user {}",update);
- int response = 0;
- if(isNewUser(update)){
- LOGGER.info("First time using app for: {} ",update.getMessage().getFrom());
- response = 1;
- }
- else{
- List<Persona> allPersons;
- Boolean validation;
- String newLastName,newFirstName,newCellphone,newCI,newBrand,newModel,newEnrollmentNumber,newPassenger;
- Integer idUser;
- Persona newPerson;
- Persona persona;
- Usuarios usuarios = usuariosRepository.findByUsuario(update.getMessage().getFrom().getId().toString());
- int last_conversation = usuarios.getIdusuarios();
- //What happens when chatbot receives a response to a conversation "last conversation"
- switch (last_conversation){
+ public List<String> processUpdate(Update update) {
+  LOGGER.info("Recibiendo update {} ", update);
+  List<String> chatResponse = new ArrayList<>();
+  Usuario usuario = initUser(update.getMessage().getFrom());
+  continueChatWithUser(update, usuario, chatResponse);
+  return chatResponse;
 
- case 1:
- idUser = usuarios.getIdPersona().getIdpersona();
- LOGGER.info("Buscando el id {} en CpPerson",idUser);
- persona = personRepository.findById(idUser).get();
- newLastName = update.getMessage().getText();
- //See if the Last name only has alphabetical Letters and spaces
- validation = isOnlyAlphabeticalCharacters(newLastName);
- if(validation){
- persona.setApellidos(newLastName);
- personRepository.save(persona);
- response = 2;
- }
- else{
- response = 4;
- }
- break;
 
- //****************************************\\
- //Here is the Menu for Carpooler\\
- //****************************************\\
- case 10:
- idUser = usuarios.getIdPersona().getIdpersona();
- LOGGER.info("Buscando el id {} en CpPerson",idUser);
- //      persona = personRepository.findById(idUser).get();
- response = 10;
- //Here is the menu for the carpooler
- if(update.getMessage().getText().equals("Registrar Vehículo")){
- response = 11;
+/** Si es la primera vez pedir una imagen para su perfil
+  List<String> result = new ArrayList<>();
+  if (initUser(update.getMessage().getFrom())) {
+            LOGGER.info("Primer inicio de sesion para: {} ",update.getMessage().getFrom() );
+            result.add("Por favor ingrese una imagen para su foto de perfil");
+        } else { // Mostrar el menu de opciones
+            LOGGER.info("Dando bienvenida a: {} ",update.getMessage().getFrom() );
+            result.add("Bienvenido al Bot");
+        }
+    return result;
+  */
  }
- if(update.getMessage().getText().equals("Ver Vehículos")){
- response = 19;
- }
- if(update.getMessage().getText().equals("Registrar Viaje")){
- response = 10;
- }
- if(update.getMessage().getText().equals("Ver viajes")){
- response = 10;
- }
- if(update.getMessage().getText().equals("Volver al Menú Principal")){
- response = 3;
- }
- break;
- }
- }
- return response;
+
+ private void continueChatWithUser(Update update, Usuario usuario, List<String> chatResponse) {
+  // Obtener el ultimo mensaje que envió el usuario
+  Chat lastMessage = chatRepository.findLastChatByUserId(usuario.getIdusuario());
+  // Preparo la variable para retornar la respuesta
+  String response = null;
+  // Si el ultimo mensaje no existe (es la primera conversación)
+  if (lastMessage == null) {
+   // Retornamos 1
+   LOGGER.info("Primer mensaje del usuario botUserId{}", usuario.getBotUserId());
+   response = "1";
+  } else {
+   // Si existe convesasción previa iniciamos la variable del ultimo mensaje en 1
+   int lastMessageInt = 0;
+   try {
+    // Intenemos obtener el ultimo mensaje retornado y lo convertimos a entero.
+    // Si la coversin falla en el catch retornamos 1
+    lastMessageInt = Integer.parseInt(lastMessage.getOutMessage());
+    response = "" + (lastMessageInt + 1);
+   } catch (NumberFormatException nfe) {
+    response = "1";
+   }
+  }
+  LOGGER.info("PROCESSING IN MESSAGE: {} from user {}" ,update.getMessage().getText(), usuario.getIdusuario());
+  // Creamos el objeto CpChat con la respuesta a la presente conversación.
+  Chat chat = new Chat();
+  chat.setIdusuario(usuario);
+  chat.setInMessage(update.getMessage().getText());
+  chat.setOutMessage(response);
+  chat.setMsgFecha(new Date()); //FIXME Obtener la fecha del campo entero update.getMessage().
+  chat.setTxDate(new Date());
+  chat.setTxUser(usuario.getIdusuario().toString());
+  chat.setTxHost(update.getMessage().getChatId().toString());
+  // Guardamos en base dedatos
+  chatRepository.save(chat);
+  // Agregamos la respuesta al chatResponse.
+  chatResponse.add(response);
  }
 
 
- private boolean isNewUser(Update update){
- boolean response = false;
- User user = update.getMessage().getFrom();
- Usuarios usuarios = usuariosRepository.findByUsuario(user.getId().toString());
- if(usuarios==null){
+
+ private Usuario  initUser(User user){
+// boolean result = false;
+ //User user = update.getMessage().getFrom();
+ Usuario usuario = usuariosRepository.findByBotUserId(user.getId().toString());
+ if(usuario==null){
  Persona persona = new Persona();
- persona.setNombres(user.getFirstName());
+ persona.setNombre(user.getFirstName());
 
  if(user.getLastName() == null){
- persona.setApellidos("-");
+ persona.setApellido("-");
  }
  else{
- persona.setNombres(user.getLastName());
+ persona.setNombre(user.getLastName());
  }
- persona.setEstatus(Estatus.ACTIVE.getEstatus());
- //   persona.setCarpool(0);//0 is for a not carpooler user
+ persona.setStatus(Estatus.ACTIVE.getEstatus());
  persona.setTxHost("localhost");
- persona.setTxUsuario("admin");
- persona.setTxFecha(new Date());
+ persona.setTxUser("admin");
+ persona.setTxDate(new Date());
  personRepository.save(persona);
- usuarios = new Usuarios();
- usuarios.setUsuario(user.getId().toString());
- //usuarios.setBotUserId(user.getId().toString());
- //   cpUser.setChatUserId(update.getMessage().getChatId().toString());
- usuarios.setIdPersona(persona);
- //     usuarios.setConversationId(1);
- usuarios.setTxHost("localhost");
- usuarios.setTxUsuario("admin");
- usuarios.setTxFecha(new Date());
- usuariosRepository.save(usuarios);
- response = true;
+ usuario = new Usuario();
+ usuario.setBotUserId(user.getId().toString());
+
+ usuario.setIdpersona(persona);
+ usuario.setTxHost("localhost");
+ usuario.setTxUser("admin");
+ usuario.setTxDate(new Date());
+ usuariosRepository.save(usuario);
+// result = true;
  }
- return response;
+ return usuario;
  }
 
  private boolean isOnlyAlphabeticalCharacters(String text){
@@ -157,8 +161,6 @@ public class BotBl {
  }
  return validation;
  }
-
- */
 
 }
 

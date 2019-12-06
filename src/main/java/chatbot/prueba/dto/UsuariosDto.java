@@ -3,9 +3,6 @@ package chatbot.prueba.dto;
 
 import chatbot.prueba.domain.Usuario;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-
 public class UsuariosDto {
 
     private Integer idusuario;

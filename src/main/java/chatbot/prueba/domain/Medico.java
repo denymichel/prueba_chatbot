@@ -45,9 +45,9 @@ public class Medico implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private int telefono;
-    @JoinColumn(name = "especialidades_idespecialidades", referencedColumnName = "idespecialidades")
+    @JoinColumn(name = "idespecialidades", referencedColumnName = "idespecialidades")
     @ManyToOne(optional = false)
-    private Especialidades especialidadesIdespecialidades;
+    private Especialidades idespecialidades;
 
     public Medico() {
     }
@@ -86,12 +86,12 @@ public class Medico implements Serializable {
         this.telefono = telefono;
     }
 
-    public Especialidades getEspecialidadesIdespecialidades() {
-        return especialidadesIdespecialidades;
+    public Especialidades getIdespecialidades() {
+        return idespecialidades;
     }
 
-    public void setEspecialidadesIdespecialidades(Especialidades especialidadesIdespecialidades) {
-        this.especialidadesIdespecialidades = especialidadesIdespecialidades;
+    public void setIdespecialidades(Especialidades idespecialidades) {
+        this.idespecialidades = idespecialidades;
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Medico implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Medico[ idmedico=" + idmedico + " ]";
+        return "chatbotuno.Medico[ idmedico=" + idmedico + " ]";
     }
     
 }

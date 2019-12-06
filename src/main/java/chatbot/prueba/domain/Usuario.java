@@ -61,15 +61,15 @@ public class Usuario implements Serializable {
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioIdusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Archivo> archivoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioIdusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Chat> chatCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioIdusuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
     private Collection<Reservas> reservasCollection;
-    @JoinColumn(name = "persona_idpersona", referencedColumnName = "idpersona")
+    @JoinColumn(name = "idpersona", referencedColumnName = "idpersona")
     @ManyToOne(optional = false)
-    private Persona personaIdpersona;
+    private Persona idpersona;
 
     public Usuario() {
     }
@@ -153,12 +153,12 @@ public class Usuario implements Serializable {
         this.reservasCollection = reservasCollection;
     }
 
-    public Persona getPersonaIdpersona() {
-        return personaIdpersona;
+    public Persona getIdpersona() {
+        return idpersona;
     }
 
-    public void setPersonaIdpersona(Persona personaIdpersona) {
-        this.personaIdpersona = personaIdpersona;
+    public void setIdpersona(Persona idpersona) {
+        this.idpersona = idpersona;
     }
 
     @Override
@@ -183,7 +183,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Usuario[ idusuario=" + idusuario + " ]";
+        return "chatbotuno.Usuario[ idusuario=" + idusuario + " ]";
     }
     
 }

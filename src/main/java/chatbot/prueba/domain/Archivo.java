@@ -57,9 +57,9 @@ public class Archivo implements Serializable {
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuario usuarioIdusuario;
+    private Usuario idusuario;
 
     public Archivo() {
     }
@@ -116,12 +116,12 @@ public class Archivo implements Serializable {
         this.txDate = txDate;
     }
 
-    public Usuario getUsuarioIdusuario() {
-        return usuarioIdusuario;
+    public Usuario getIdusuario() {
+        return idusuario;
     }
 
-    public void setUsuarioIdusuario(Usuario usuarioIdusuario) {
-        this.usuarioIdusuario = usuarioIdusuario;
+    public void setIdusuario(Usuario idusuario) {
+        this.idusuario = idusuario;
     }
 
     @Override
@@ -146,7 +146,7 @@ public class Archivo implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Archivo[ idarchivo=" + idarchivo + " ]";
+        return "chatbotuno.Archivo[ idarchivo=" + idarchivo + " ]";
     }
     
 }

@@ -31,8 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Horarios.findAll", query = "SELECT h FROM Horarios h")
     , @NamedQuery(name = "Horarios.findByIdhorarios", query = "SELECT h FROM Horarios h WHERE h.idhorarios = :idhorarios")
-    , @NamedQuery(name = "Horarios.findByHoraInicio", query = "SELECT h FROM Horarios h WHERE h.horaInicio = :horaInicio")
-    , @NamedQuery(name = "Horarios.findByHoraFin", query = "SELECT h FROM Horarios h WHERE h.horaFin = :horaFin")})
+    , @NamedQuery(name = "Horarios.findByTurno", query = "SELECT h FROM Horarios h WHERE h.turno = :turno")
+    , @NamedQuery(name = "Horarios.findByHora", query = "SELECT h FROM Horarios h WHERE h.hora = :hora")})
 public class Horarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,13 +42,13 @@ public class Horarios implements Serializable {
     @Column(name = "idhorarios")
     private Integer idhorarios;
     @Basic(optional = false)
-    @Column(name = "hora_inicio")
-    private String horaInicio;
+    @Column(name = "turno")
+    private String turno;
     @Basic(optional = false)
-    @Column(name = "hora_fin")
-    private String horaFin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "horariosIdhorarios")
-    private Collection<Especialidades> especialidadesCollection;
+    @Column(name = "hora")
+    private String hora;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idhorarios")
+    private Collection<EspecialidadHorario> especialidadHorarioCollection;
 
     public Horarios() {
     }
@@ -57,10 +57,10 @@ public class Horarios implements Serializable {
         this.idhorarios = idhorarios;
     }
 
-    public Horarios(Integer idhorarios, String horaInicio, String horaFin) {
+    public Horarios(Integer idhorarios, String turno, String hora) {
         this.idhorarios = idhorarios;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
+        this.turno = turno;
+        this.hora = hora;
     }
 
     public Integer getIdhorarios() {
@@ -71,29 +71,29 @@ public class Horarios implements Serializable {
         this.idhorarios = idhorarios;
     }
 
-    public String getHoraInicio() {
-        return horaInicio;
+    public String getTurno() {
+        return turno;
     }
 
-    public void setHoraInicio(String horaInicio) {
-        this.horaInicio = horaInicio;
+    public void setTurno(String turno) {
+        this.turno = turno;
     }
 
-    public String getHoraFin() {
-        return horaFin;
+    public String getHora() {
+        return hora;
     }
 
-    public void setHoraFin(String horaFin) {
-        this.horaFin = horaFin;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     @XmlTransient
-    public Collection<Especialidades> getEspecialidadesCollection() {
-        return especialidadesCollection;
+    public Collection<EspecialidadHorario> getEspecialidadHorarioCollection() {
+        return especialidadHorarioCollection;
     }
 
-    public void setEspecialidadesCollection(Collection<Especialidades> especialidadesCollection) {
-        this.especialidadesCollection = especialidadesCollection;
+    public void setEspecialidadHorarioCollection(Collection<EspecialidadHorario> especialidadHorarioCollection) {
+        this.especialidadHorarioCollection = especialidadHorarioCollection;
     }
 
     @Override
@@ -118,7 +118,7 @@ public class Horarios implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Horarios[ idhorarios=" + idhorarios + " ]";
+        return "chatbotuno.Horarios[ idhorarios=" + idhorarios + " ]";
     }
     
 }

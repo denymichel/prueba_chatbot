@@ -49,7 +49,6 @@ public class Chat implements Serializable {
     @Basic(optional = false)
     @Column(name = "in_message")
     private String inMessage;
-    @Basic(optional = false)
     @Column(name = "out_message")
     private String outMessage;
     @Basic(optional = false)
@@ -66,9 +65,9 @@ public class Chat implements Serializable {
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
-    @JoinColumn(name = "usuario_idusuario", referencedColumnName = "idusuario")
+    @JoinColumn(name = "idusuario", referencedColumnName = "idusuario")
     @ManyToOne(optional = false)
-    private Usuario usuarioIdusuario;
+    private Usuario idusuario;
 
     public Chat() {
     }
@@ -77,10 +76,9 @@ public class Chat implements Serializable {
         this.idchat = idchat;
     }
 
-    public Chat(Integer idchat, String inMessage, String outMessage, Date msgFecha, String txUser, String txHost, Date txDate) {
+    public Chat(Integer idchat, String inMessage, Date msgFecha, String txUser, String txHost, Date txDate) {
         this.idchat = idchat;
         this.inMessage = inMessage;
-        this.outMessage = outMessage;
         this.msgFecha = msgFecha;
         this.txUser = txUser;
         this.txHost = txHost;
@@ -143,12 +141,12 @@ public class Chat implements Serializable {
         this.txDate = txDate;
     }
 
-    public Usuario getUsuarioIdusuario() {
-        return usuarioIdusuario;
+    public Usuario getIdusuario() {
+        return idusuario;
     }
 
-    public void setUsuarioIdusuario(Usuario usuarioIdusuario) {
-        this.usuarioIdusuario = usuarioIdusuario;
+    public void setIdusuario(Usuario idusuario) {
+        this.idusuario = idusuario;
     }
 
     @Override
@@ -173,7 +171,7 @@ public class Chat implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbot.Chat[ idchat=" + idchat + " ]";
+        return "chatbotuno.Chat[ idchat=" + idchat + " ]";
     }
     
 }
