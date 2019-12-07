@@ -9,6 +9,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardRemove;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.ArrayList;
@@ -69,26 +71,84 @@ public class MainBot extends TelegramLongPollingBot{
         return "965898434:AAFYisxZkAsAWykdChxs9DNy1ceCADAmogo";
     }
 
+    private ReplyKeyboardMarkup createReplyKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
 
-    //car
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        row.add("Registro");
+        keyboard.add(row);
+        keyboardMarkup.setKeyboard(keyboard);
+
+        return keyboardMarkup;
+    }
+    private ReplyKeyboardMarkup createOkMenu(){
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+
+        row.add("OK");
+
+        keyboard.add(row);
+        keyboardMarkup.setKeyboard(keyboard);
+
+        return keyboardMarkup;
+
+    }
+    private ReplyKeyboardMarkup createReplyKeyboardCarpooler() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow row = new KeyboardRow();
+
+        row.add("Registrar Paciente");
+        keyboard.add(row);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        return keyboardMarkup;
+    }
+
 
      public void response(int conversation, Update update) {
      List<String> responses = new ArrayList<>();
      ReplyKeyboardMarkup rkm = null;
      switch (conversation) {
-     //****************************************\\
-     //Here is the initial registering\\
-     //****************************************\\
-     case 1:
-     responses.add("Bienvenido a Carpooling Bot");
-     responses.add("Para usar el ChatBot debes registrarte primero");
-     responses.add("Ingresa tus apellidos");
-     break;
-     case 2:
-     responses.add("Ingresa tu nombre");
-     break;
-     }
-     }
 
-    // //////////////////////////////////////////////
-}
+         //Listado registro
+         case 1:
+             responses.add("Bienvenido a AsisMedBot");
+             responses.add("Para usar el ChatBot debes registrarte primero");
+             responses.add("Ingresa un nombre");
+             break;
+         case 2:
+             responses.add("Ingresa un apellido");
+             break;
+         case 3:
+             responses.add("Ingresa N° de C.I.");
+             break;
+         case 4:
+             responses.add("Ingresa N° de celular");
+             break;
+
+     }
+         for(String messageText: responses) {
+             SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
+                     .setChatId(update.getMessage().getChatId())
+                     .setText(messageText);
+             if(rkm!=null){
+                 message.setReplyMarkup(rkm);
+             }else{
+                 ReplyKeyboardRemove keyboardMarkupRemove = new ReplyKeyboardRemove();
+                 message.setReplyMarkup(keyboardMarkupRemove);
+             }
+             try {
+                 this.execute(message);
+
+             } catch (TelegramApiException e) {
+                 e.printStackTrace();
+             }
+         }
+
+
+
+     }}
