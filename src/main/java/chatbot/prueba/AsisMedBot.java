@@ -58,7 +58,7 @@ public class AsisMedBot extends TelegramLongPollingBot {
         String message_text = message.getText();
         long chat_id = message.getChatId();
         int position=getId(chat_id);
-        if ((message_text.equals("/iniciar") || data.get(position)[3].equals(2L)) ) {
+        if ((message_text.equals("/inicio") || data.get(position)[3].equals(2L)) ) {
             if(!register(chat_id, position, message_text) && data.get(position)[1].equals(0L)){
                 LOGGER.info("Id registering");
             }else{
@@ -66,7 +66,7 @@ public class AsisMedBot extends TelegramLongPollingBot {
                 createUserType(chat_id); //metodo que manda un mensaje "Como desea entrar?"
             }
         }
-      if (((message_text.equals("/registrar_persona") || data.get(position)[3].equals(1L))) && data.get(position)[1].equals(2L)) {
+      if (((message_text.equals("/registro") || data.get(position)[3].equals(1L))) && data.get(position)[1].equals(2L)) {
             data.get(position)[3]= Long.valueOf(1);
             data.get(position)[2]= Long.valueOf(personaBl.personaRegistro(message_text, chat_id, Math.toIntExact(data.get(position)[2]), personaDto, new AsisMedBot()));
 
@@ -76,7 +76,7 @@ public class AsisMedBot extends TelegramLongPollingBot {
         if (message_text.equals("Paciente")){
             sendMessage(chat_id, "Usted entro como:"+message_text);
             data.get(position)[1]= Long.valueOf(2);
-            LOGGER.info(data.get(position)[0]+" is in Carpooler mode");
+            LOGGER.info(data.get(position)[0]+" in Paciente mode");
         }
 
     }

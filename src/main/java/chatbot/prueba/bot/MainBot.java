@@ -95,7 +95,7 @@ public class MainBot extends TelegramLongPollingBot{
         return keyboardMarkup;
 
     }
-    private ReplyKeyboardMarkup createReplyKeyboardCarpooler() {
+    private ReplyKeyboardMarkup createReplyKeyboardAsisMedBot() {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
 
@@ -118,16 +118,19 @@ public class MainBot extends TelegramLongPollingBot{
          case 1:
              responses.add("Bienvenido a AsisMedBot");
              responses.add("Para usar el ChatBot debes registrarte primero");
-             responses.add("Ingresa un nombre");
+             rkm= createReplyKeyboardAsisMedBot();
              break;
-         case 2:
-             responses.add("Ingresa un apellido");
+          case 2:   responses.add("Ingresa un nombre");
              break;
          case 3:
-             responses.add("Ingresa N° de C.I.");
+             responses.add("Ingresa un apellido");
              break;
          case 4:
+             responses.add("Ingresa N° de C.I.");
+             break;
+         case 5:
              responses.add("Ingresa N° de celular");
+             rkm= createOkMenu();
              break;
 
      }
