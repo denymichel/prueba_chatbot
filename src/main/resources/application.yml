@@ -3,7 +3,7 @@ spring:
     name: chatbot
   datasource:
     platform: postgres
-    url: jdbc:postgresql://127.0.0.1:5432/chatbotuno
+    url: jdbc:postgresql://127.0.0.1:5432/chatbotdos
     username: postgres
     password: postgres
 

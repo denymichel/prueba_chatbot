@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "medico")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Medico.findAll", query = "SELECT m FROM Medico m")
-    , @NamedQuery(name = "Medico.findByIdmedico", query = "SELECT m FROM Medico m WHERE m.idmedico = :idmedico")
-    , @NamedQuery(name = "Medico.findByNombre", query = "SELECT m FROM Medico m WHERE m.nombre = :nombre")
-    , @NamedQuery(name = "Medico.findByTelefono", query = "SELECT m FROM Medico m WHERE m.telefono = :telefono")})
+        @NamedQuery(name = "Medico.findAll", query = "SELECT m FROM Medico m")
+        , @NamedQuery(name = "Medico.findByIdmedico", query = "SELECT m FROM Medico m WHERE m.idmedico = :idmedico")
+        , @NamedQuery(name = "Medico.findByNombre", query = "SELECT m FROM Medico m WHERE m.nombre = :nombre")
+        , @NamedQuery(name = "Medico.findByTelefono", query = "SELECT m FROM Medico m WHERE m.telefono = :telefono")})
 public class Medico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -118,5 +118,5 @@ public class Medico implements Serializable {
     public String toString() {
         return "chatbotuno.Medico[ idmedico=" + idmedico + " ]";
     }
-    
+
 }

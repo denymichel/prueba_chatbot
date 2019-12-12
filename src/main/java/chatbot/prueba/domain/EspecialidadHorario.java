@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "especialidad_horario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "EspecialidadHorario.findAll", query = "SELECT e FROM EspecialidadHorario e")
-    , @NamedQuery(name = "EspecialidadHorario.findByIdEH", query = "SELECT e FROM EspecialidadHorario e WHERE e.idEH = :idEH")})
+        @NamedQuery(name = "EspecialidadHorario.findAll", query = "SELECT e FROM EspecialidadHorario e")
+        , @NamedQuery(name = "EspecialidadHorario.findByIdEH", query = "SELECT e FROM EspecialidadHorario e WHERE e.idEH = :idEH")})
 public class EspecialidadHorario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,5 +96,5 @@ public class EspecialidadHorario implements Serializable {
     public String toString() {
         return "chatbotuno.EspecialidadHorario[ idEH=" + idEH + " ]";
     }
-    
+
 }

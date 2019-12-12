@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "horarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Horarios.findAll", query = "SELECT h FROM Horarios h")
-    , @NamedQuery(name = "Horarios.findByIdhorarios", query = "SELECT h FROM Horarios h WHERE h.idhorarios = :idhorarios")
-    , @NamedQuery(name = "Horarios.findByTurno", query = "SELECT h FROM Horarios h WHERE h.turno = :turno")
-    , @NamedQuery(name = "Horarios.findByHora", query = "SELECT h FROM Horarios h WHERE h.hora = :hora")})
+        @NamedQuery(name = "Horarios.findAll", query = "SELECT h FROM Horarios h")
+        , @NamedQuery(name = "Horarios.findByIdhorarios", query = "SELECT h FROM Horarios h WHERE h.idhorarios = :idhorarios")
+        , @NamedQuery(name = "Horarios.findByTurno", query = "SELECT h FROM Horarios h WHERE h.turno = :turno")
+        , @NamedQuery(name = "Horarios.findByHora", query = "SELECT h FROM Horarios h WHERE h.hora = :hora")})
 public class Horarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -120,5 +120,5 @@ public class Horarios implements Serializable {
     public String toString() {
         return "chatbotuno.Horarios[ idhorarios=" + idhorarios + " ]";
     }
-    
+
 }

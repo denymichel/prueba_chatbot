@@ -34,12 +34,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario")
-    , @NamedQuery(name = "Usuario.findByBotUserId", query = "SELECT u FROM Usuario u WHERE u.botUserId = :botUserId")
-    , @NamedQuery(name = "Usuario.findByTxUser", query = "SELECT u FROM Usuario u WHERE u.txUser = :txUser")
-    , @NamedQuery(name = "Usuario.findByTxHost", query = "SELECT u FROM Usuario u WHERE u.txHost = :txHost")
-    , @NamedQuery(name = "Usuario.findByTxDate", query = "SELECT u FROM Usuario u WHERE u.txDate = :txDate")})
+        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+        , @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario")
+        , @NamedQuery(name = "Usuario.findByBotUserId", query = "SELECT u FROM Usuario u WHERE u.botUserId = :botUserId")
+        , @NamedQuery(name = "Usuario.findByChatUserId", query = "SELECT u FROM Usuario u WHERE u.chatUserId = :chatUserId")
+        , @NamedQuery(name = "Usuario.findByConversacionId", query = "SELECT u FROM Usuario u WHERE u.conversacionId = :conversacionId")
+        , @NamedQuery(name = "Usuario.findBySubConversacionId", query = "SELECT u FROM Usuario u WHERE u.subConversacionId = :subConversacionId")
+        , @NamedQuery(name = "Usuario.findByInMessage", query = "SELECT u FROM Usuario u WHERE u.inMessage = :inMessage")
+        , @NamedQuery(name = "Usuario.findByOutMessage", query = "SELECT u FROM Usuario u WHERE u.outMessage = :outMessage")
+        , @NamedQuery(name = "Usuario.findByTxUser", query = "SELECT u FROM Usuario u WHERE u.txUser = :txUser")
+        , @NamedQuery(name = "Usuario.findByTxHost", query = "SELECT u FROM Usuario u WHERE u.txHost = :txHost")
+        , @NamedQuery(name = "Usuario.findByTxDate", query = "SELECT u FROM Usuario u WHERE u.txDate = :txDate")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,6 +56,16 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "bot_user_id")
     private String botUserId;
+    @Column(name = "chat_user_id")
+    private String chatUserId;
+    @Column(name = "conversacion_id")
+    private Integer conversacionId;
+    @Column(name = "sub_conversacion_id")
+    private Integer subConversacionId;
+    @Column(name = "in_message")
+    private String inMessage;
+    @Column(name = "out_message")
+    private String outMessage;
     @Basic(optional = false)
     @Column(name = "tx_user")
     private String txUser;
@@ -100,6 +115,46 @@ public class Usuario implements Serializable {
 
     public void setBotUserId(String botUserId) {
         this.botUserId = botUserId;
+    }
+
+    public String getChatUserId() {
+        return chatUserId;
+    }
+
+    public void setChatUserId(String chatUserId) {
+        this.chatUserId = chatUserId;
+    }
+
+    public Integer getConversacionId() {
+        return conversacionId;
+    }
+
+    public void setConversacionId(Integer conversacionId) {
+        this.conversacionId = conversacionId;
+    }
+
+    public Integer getSubConversacionId() {
+        return subConversacionId;
+    }
+
+    public void setSubConversacionId(Integer subConversacionId) {
+        this.subConversacionId = subConversacionId;
+    }
+
+    public String getInMessage() {
+        return inMessage;
+    }
+
+    public void setInMessage(String inMessage) {
+        this.inMessage = inMessage;
+    }
+
+    public String getOutMessage() {
+        return outMessage;
+    }
+
+    public void setOutMessage(String outMessage) {
+        this.outMessage = outMessage;
     }
 
     public String getTxUser() {
@@ -183,7 +238,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbotuno.Usuario[ idusuario=" + idusuario + " ]";
+        return "chatbotdos.Usuario[ idusuario=" + idusuario + " ]";
     }
-    
+
 }

@@ -30,13 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "reservas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Reservas.findAll", query = "SELECT r FROM Reservas r")
-    , @NamedQuery(name = "Reservas.findByIdreservas", query = "SELECT r FROM Reservas r WHERE r.idreservas = :idreservas")
-    , @NamedQuery(name = "Reservas.findByFecha", query = "SELECT r FROM Reservas r WHERE r.fecha = :fecha")
-    , @NamedQuery(name = "Reservas.findByHora", query = "SELECT r FROM Reservas r WHERE r.hora = :hora")
-    , @NamedQuery(name = "Reservas.findByTxUser", query = "SELECT r FROM Reservas r WHERE r.txUser = :txUser")
-    , @NamedQuery(name = "Reservas.findByTxHost", query = "SELECT r FROM Reservas r WHERE r.txHost = :txHost")
-    , @NamedQuery(name = "Reservas.findByTxDate", query = "SELECT r FROM Reservas r WHERE r.txDate = :txDate")})
+        @NamedQuery(name = "Reservas.findAll", query = "SELECT r FROM Reservas r")
+        , @NamedQuery(name = "Reservas.findByIdreservas", query = "SELECT r FROM Reservas r WHERE r.idreservas = :idreservas")
+        , @NamedQuery(name = "Reservas.findByFecha", query = "SELECT r FROM Reservas r WHERE r.fecha = :fecha")
+        , @NamedQuery(name = "Reservas.findByHora", query = "SELECT r FROM Reservas r WHERE r.hora = :hora")
+        , @NamedQuery(name = "Reservas.findByTxUser", query = "SELECT r FROM Reservas r WHERE r.txUser = :txUser")
+        , @NamedQuery(name = "Reservas.findByTxHost", query = "SELECT r FROM Reservas r WHERE r.txHost = :txHost")
+        , @NamedQuery(name = "Reservas.findByTxDate", query = "SELECT r FROM Reservas r WHERE r.txDate = :txDate")})
 public class Reservas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -174,5 +174,5 @@ public class Reservas implements Serializable {
     public String toString() {
         return "chatbotuno.Reservas[ idreservas=" + idreservas + " ]";
     }
-    
+
 }

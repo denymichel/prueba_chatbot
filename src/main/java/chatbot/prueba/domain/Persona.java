@@ -32,16 +32,16 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "persona")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
-    , @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona")
-    , @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre")
-    , @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido")
-    , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
-    , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
-    , @NamedQuery(name = "Persona.findByStatus", query = "SELECT p FROM Persona p WHERE p.status = :status")
-    , @NamedQuery(name = "Persona.findByTxUser", query = "SELECT p FROM Persona p WHERE p.txUser = :txUser")
-    , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
-    , @NamedQuery(name = "Persona.findByTxDate", query = "SELECT p FROM Persona p WHERE p.txDate = :txDate")})
+        @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")
+        , @NamedQuery(name = "Persona.findByIdpersona", query = "SELECT p FROM Persona p WHERE p.idpersona = :idpersona")
+        , @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre")
+        , @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido")
+        , @NamedQuery(name = "Persona.findByCi", query = "SELECT p FROM Persona p WHERE p.ci = :ci")
+        , @NamedQuery(name = "Persona.findByTelefono", query = "SELECT p FROM Persona p WHERE p.telefono = :telefono")
+        , @NamedQuery(name = "Persona.findByStatus", query = "SELECT p FROM Persona p WHERE p.status = :status")
+        , @NamedQuery(name = "Persona.findByTxUser", query = "SELECT p FROM Persona p WHERE p.txUser = :txUser")
+        , @NamedQuery(name = "Persona.findByTxHost", query = "SELECT p FROM Persona p WHERE p.txHost = :txHost")
+        , @NamedQuery(name = "Persona.findByTxDate", query = "SELECT p FROM Persona p WHERE p.txDate = :txDate")})
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,25 +53,18 @@ public class Persona implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
     @Column(name = "apellido")
     private String apellido;
-    @Basic(optional = false)
     @Column(name = "ci")
-    private int ci;
-    @Basic(optional = false)
+    private Integer ci;
     @Column(name = "telefono")
-    private int telefono;
-    @Basic(optional = false)
+    private Integer telefono;
     @Column(name = "status")
-    private int status;
-    @Basic(optional = false)
+    private Integer status;
     @Column(name = "tx_user")
     private String txUser;
-    @Basic(optional = false)
     @Column(name = "tx_host")
     private String txHost;
-    @Basic(optional = false)
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
@@ -85,16 +78,9 @@ public class Persona implements Serializable {
         this.idpersona = idpersona;
     }
 
-    public Persona(Integer idpersona, String nombre, String apellido, int ci, int telefono, int status, String txUser, String txHost, Date txDate) {
+    public Persona(Integer idpersona, String nombre) {
         this.idpersona = idpersona;
         this.nombre = nombre;
-        this.apellido = apellido;
-        this.ci = ci;
-        this.telefono = telefono;
-        this.status = status;
-        this.txUser = txUser;
-        this.txHost = txHost;
-        this.txDate = txDate;
     }
 
     public Integer getIdpersona() {
@@ -121,27 +107,27 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    public int getCi() {
+    public Integer getCi() {
         return ci;
     }
 
-    public void setCi(int ci) {
+    public void setCi(Integer ci) {
         this.ci = ci;
     }
 
-    public int getTelefono() {
+    public Integer getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -200,7 +186,16 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "chatbotuno.Persona[ idpersona=" + idpersona + " ]";
+        return "Persona{" +
+                "idpersona=" + idpersona +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", ci=" + ci +
+                ", telefono=" + telefono +
+                ", status=" + status +
+                ", txUser='" + txUser + '\'' +
+                ", txHost='" + txHost + '\'' +
+                ", txDate=" + txDate +
+                '}';
     }
-    
 }

@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "especialidades")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Especialidades.findAll", query = "SELECT e FROM Especialidades e")
-    , @NamedQuery(name = "Especialidades.findByIdespecialidades", query = "SELECT e FROM Especialidades e WHERE e.idespecialidades = :idespecialidades")
-    , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")
-    , @NamedQuery(name = "Especialidades.findByPrecioConsulta", query = "SELECT e FROM Especialidades e WHERE e.precioConsulta = :precioConsulta")})
+        @NamedQuery(name = "Especialidades.findAll", query = "SELECT e FROM Especialidades e")
+        , @NamedQuery(name = "Especialidades.findByIdespecialidades", query = "SELECT e FROM Especialidades e WHERE e.idespecialidades = :idespecialidades")
+        , @NamedQuery(name = "Especialidades.findByEspecialidad", query = "SELECT e FROM Especialidades e WHERE e.especialidad = :especialidad")
+        , @NamedQuery(name = "Especialidades.findByPrecioConsulta", query = "SELECT e FROM Especialidades e WHERE e.precioConsulta = :precioConsulta")})
 public class Especialidades implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -142,5 +142,5 @@ public class Especialidades implements Serializable {
     public String toString() {
         return "chatbotuno.Especialidades[ idespecialidades=" + idespecialidades + " ]";
     }
-    
+
 }

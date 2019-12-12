@@ -13,7 +13,7 @@
     <class>chatbot.prueba.domain.Usuario</class>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:15432/chatbotuno"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:15432/chatbotdos"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="postgres"/>

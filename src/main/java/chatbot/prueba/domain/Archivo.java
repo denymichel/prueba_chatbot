@@ -30,12 +30,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "archivo")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a")
-    , @NamedQuery(name = "Archivo.findByIdarchivo", query = "SELECT a FROM Archivo a WHERE a.idarchivo = :idarchivo")
-    , @NamedQuery(name = "Archivo.findByImagen", query = "SELECT a FROM Archivo a WHERE a.imagen = :imagen")
-    , @NamedQuery(name = "Archivo.findByTxUser", query = "SELECT a FROM Archivo a WHERE a.txUser = :txUser")
-    , @NamedQuery(name = "Archivo.findByTxHost", query = "SELECT a FROM Archivo a WHERE a.txHost = :txHost")
-    , @NamedQuery(name = "Archivo.findByTxDate", query = "SELECT a FROM Archivo a WHERE a.txDate = :txDate")})
+        @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a")
+        , @NamedQuery(name = "Archivo.findByIdarchivo", query = "SELECT a FROM Archivo a WHERE a.idarchivo = :idarchivo")
+        , @NamedQuery(name = "Archivo.findByImagen", query = "SELECT a FROM Archivo a WHERE a.imagen = :imagen")
+        , @NamedQuery(name = "Archivo.findByTxUser", query = "SELECT a FROM Archivo a WHERE a.txUser = :txUser")
+        , @NamedQuery(name = "Archivo.findByTxHost", query = "SELECT a FROM Archivo a WHERE a.txHost = :txHost")
+        , @NamedQuery(name = "Archivo.findByTxDate", query = "SELECT a FROM Archivo a WHERE a.txDate = :txDate")})
 public class Archivo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -148,5 +148,5 @@ public class Archivo implements Serializable {
     public String toString() {
         return "chatbotuno.Archivo[ idarchivo=" + idarchivo + " ]";
     }
-    
+
 }

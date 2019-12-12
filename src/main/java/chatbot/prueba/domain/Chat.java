@@ -30,14 +30,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "chat")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Chat.findAll", query = "SELECT c FROM Chat c")
-    , @NamedQuery(name = "Chat.findByIdchat", query = "SELECT c FROM Chat c WHERE c.idchat = :idchat")
-    , @NamedQuery(name = "Chat.findByInMessage", query = "SELECT c FROM Chat c WHERE c.inMessage = :inMessage")
-    , @NamedQuery(name = "Chat.findByOutMessage", query = "SELECT c FROM Chat c WHERE c.outMessage = :outMessage")
-    , @NamedQuery(name = "Chat.findByMsgFecha", query = "SELECT c FROM Chat c WHERE c.msgFecha = :msgFecha")
-    , @NamedQuery(name = "Chat.findByTxUser", query = "SELECT c FROM Chat c WHERE c.txUser = :txUser")
-    , @NamedQuery(name = "Chat.findByTxHost", query = "SELECT c FROM Chat c WHERE c.txHost = :txHost")
-    , @NamedQuery(name = "Chat.findByTxDate", query = "SELECT c FROM Chat c WHERE c.txDate = :txDate")})
+        @NamedQuery(name = "Chat.findAll", query = "SELECT c FROM Chat c")
+        , @NamedQuery(name = "Chat.findByIdchat", query = "SELECT c FROM Chat c WHERE c.idchat = :idchat")
+        , @NamedQuery(name = "Chat.findByInMessage", query = "SELECT c FROM Chat c WHERE c.inMessage = :inMessage")
+        , @NamedQuery(name = "Chat.findByOutMessage", query = "SELECT c FROM Chat c WHERE c.outMessage = :outMessage")
+        , @NamedQuery(name = "Chat.findByMsgFecha", query = "SELECT c FROM Chat c WHERE c.msgFecha = :msgFecha")
+        , @NamedQuery(name = "Chat.findByTxUser", query = "SELECT c FROM Chat c WHERE c.txUser = :txUser")
+        , @NamedQuery(name = "Chat.findByTxHost", query = "SELECT c FROM Chat c WHERE c.txHost = :txHost")
+        , @NamedQuery(name = "Chat.findByTxDate", query = "SELECT c FROM Chat c WHERE c.txDate = :txDate")})
 public class Chat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -173,5 +173,5 @@ public class Chat implements Serializable {
     public String toString() {
         return "chatbotuno.Chat[ idchat=" + idchat + " ]";
     }
-    
+
 }
