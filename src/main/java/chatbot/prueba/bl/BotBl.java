@@ -24,7 +24,7 @@ public class BotBl {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BotBl.class);
-    //anadimos repositorios usuarios, persona,
+    //anadimos repositorios usuarios, persona y chat
     private UsuariosRepository usuariosRepository;
     private PersonRepository personRepository;
     private ChatRepository chatRepository;
@@ -45,6 +45,7 @@ public class BotBl {
   continueChatWithUser(update, usuario, chatResponse);
   return chatResponse;
 
+<<<<<<< HEAD
  /**Si es la primera vez pedir una imagen para su perfil
   List<String> result = new ArrayList<>();
   if (initUser(update.getMessage().getFrom())) {
@@ -241,6 +242,8 @@ public class BotBl {
    usuariosRepository.save(usuario);
   }
   return response;
+=======
+>>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
  }
 */
 
@@ -263,7 +266,13 @@ public class BotBl {
   if (lastMessage == null) {
    // Retornamos 1
    LOGGER.info("Primer mensaje del usuario botUserId{}", usuario.getBotUserId());
+<<<<<<< HEAD
    response = "bienvenido ";
+=======
+   response="Bienvenido a AsisMedBot" +
+           "Soy un asistente automatizado que puedo ayudarte a realizar una reserva medica desde cualquier lugar" +
+           "/inicio";
+>>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
   } else {
    // Si existe convesasción previa iniciamos la variable del ultimo mensaje en 1
    int lastMessageInt = 0;
@@ -273,7 +282,13 @@ public class BotBl {
     lastMessageInt = Integer.parseInt(lastMessage.getOutMessage());
     response = "" + (lastMessageInt + 1);
    } catch (NumberFormatException nfe) {
+<<<<<<< HEAD
     response = "hola de nuevo ";
+=======
+    response = "Hola de nuevo, soy Bender" +
+            "para  realizar la reserva, porfvor registrate" +
+            "/registro";
+>>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
    }
   }
 

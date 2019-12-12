@@ -73,6 +73,42 @@ public class MainBot extends TelegramLongPollingBot{
         return "965898434:AAFYisxZkAsAWykdChxs9DNy1ceCADAmogo";
     }
 
+    private ReplyKeyboardMarkup createReplyKeyboard() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+        row.add("Registro");
+        keyboard.add(row);
+        keyboardMarkup.setKeyboard(keyboard);
+
+        return keyboardMarkup;
+    }
+    private ReplyKeyboardMarkup createOkMenu(){
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        KeyboardRow row = new KeyboardRow();
+
+        row.add("OK");
+
+        keyboard.add(row);
+        keyboardMarkup.setKeyboard(keyboard);
+
+        return keyboardMarkup;
+
+    }
+    private ReplyKeyboardMarkup createReplyKeyboardAsisMedBot() {
+        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        KeyboardRow row = new KeyboardRow();
+
+        row.add("Registrar Paciente");
+        keyboard.add(row);
+
+        keyboardMarkup.setKeyboard(keyboard);
+        return keyboardMarkup;
+    }
 
 
 
@@ -124,6 +160,7 @@ public class MainBot extends TelegramLongPollingBot{
      public void response(int conversation, Update update) {
      List<String> responses = new ArrayList<>();
      ReplyKeyboardMarkup rkm = null;
+<<<<<<< HEAD
          switch (conversation) {
          //****************************************\\
          //Here is the initial registering\\
@@ -158,6 +195,48 @@ public class MainBot extends TelegramLongPollingBot{
                  }
              }
     }
+=======
+     switch (conversation) {
+>>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
 
-    // //////////////////////////////////////////////
-}
+         //Listado registro
+         case 1:
+             responses.add("Bienvenido a AsisMedBot");
+             responses.add("Para usar el ChatBot debes registrarte primero");
+             rkm= createReplyKeyboardAsisMedBot();
+             break;
+          case 2:   responses.add("Ingresa un nombre");
+             break;
+         case 3:
+             responses.add("Ingresa un apellido");
+             break;
+         case 4:
+             responses.add("Ingresa N° de C.I.");
+             break;
+         case 5:
+             responses.add("Ingresa N° de celular");
+             rkm= createOkMenu();
+             break;
+
+     }
+         for(String messageText: responses) {
+             SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
+                     .setChatId(update.getMessage().getChatId())
+                     .setText(messageText);
+             if(rkm!=null){
+                 message.setReplyMarkup(rkm);
+             }else{
+                 ReplyKeyboardRemove keyboardMarkupRemove = new ReplyKeyboardRemove();
+                 message.setReplyMarkup(keyboardMarkupRemove);
+             }
+             try {
+                 this.execute(message);
+
+             } catch (TelegramApiException e) {
+                 e.printStackTrace();
+             }
+         }
+
+
+
+     }}
