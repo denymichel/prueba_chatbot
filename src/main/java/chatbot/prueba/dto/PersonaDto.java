@@ -9,8 +9,8 @@ public class PersonaDto {
     private Integer idpersona;
     private String nombre;
     private String apellido;
-    private int ci;
-    private int telefono;
+    private String ci;
+    private String telefono;
 
     //creamos lista de UsuarioDto en PersonaDto
     private List<UsuariosDto> usuariosList;
@@ -50,19 +50,19 @@ public class PersonaDto {
         this.apellido = apellido;
     }
 
-    public int getCi() {
+    public String getCi() {
         return ci;
     }
 
-    public void setCi(int ci) {
+    public void setCi(String ci) {
         this.ci = ci;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

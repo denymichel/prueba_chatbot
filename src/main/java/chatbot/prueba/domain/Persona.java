@@ -53,18 +53,23 @@ public class Persona implements Serializable {
     @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
+    @Basic(optional = false)
     @Column(name = "apellido")
     private String apellido;
     @Column(name = "ci")
-    private Integer ci;
+    private String ci;
     @Column(name = "telefono")
-    private Integer telefono;
+    private String telefono;
+    @Basic(optional = false)
     @Column(name = "status")
-    private Integer status;
+    private int status;
+    @Basic(optional = false)
     @Column(name = "tx_user")
     private String txUser;
+    @Basic(optional = false)
     @Column(name = "tx_host")
     private String txHost;
+    @Basic(optional = false)
     @Column(name = "tx_date")
     @Temporal(TemporalType.DATE)
     private Date txDate;
@@ -78,9 +83,14 @@ public class Persona implements Serializable {
         this.idpersona = idpersona;
     }
 
-    public Persona(Integer idpersona, String nombre) {
+    public Persona(Integer idpersona, String nombre, String apellido, int status, String txUser, String txHost, Date txDate) {
         this.idpersona = idpersona;
         this.nombre = nombre;
+        this.apellido = apellido;
+        this.status = status;
+        this.txUser = txUser;
+        this.txHost = txHost;
+        this.txDate = txDate;
     }
 
     public Integer getIdpersona() {
@@ -107,27 +117,27 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    public Integer getCi() {
+    public String getCi() {
         return ci;
     }
 
-    public void setCi(Integer ci) {
+    public void setCi(String ci) {
         this.ci = ci;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -184,14 +194,15 @@ public class Persona implements Serializable {
         return true;
     }
 
+
     @Override
     public String toString() {
         return "Persona{" +
                 "idpersona=" + idpersona +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", ci=" + ci +
-                ", telefono=" + telefono +
+                ", ci='" + ci + '\'' +
+                ", telefono='" + telefono + '\'' +
                 ", status=" + status +
                 ", txUser='" + txUser + '\'' +
                 ", txHost='" + txHost + '\'' +

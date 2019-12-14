@@ -106,7 +106,7 @@ public class PersonaBl {
                 asisMedBot.sendMessage(chad_id, text); // Sending our message object to user
                 break;
             case 3:
-                AsisMedBot.personaDto.setTelefono(Integer.parseInt(message_text));
+                AsisMedBot.personaDto.setTelefono(message_text);
                 String val = "Nombre = " + personaDto.getNombre() + "\nApellido = " + personaDto.getApellido() + "\nTelefono = " + personaDto.getTelefono();
                 step =0 ;
                 text = "Su registro ha sido exitoso:";

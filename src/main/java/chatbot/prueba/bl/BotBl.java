@@ -1,5 +1,6 @@
 package chatbot.prueba.bl;
 
+import chatbot.prueba.bot.ResponseConversation;
 import chatbot.prueba.dao.ChatRepository;
 import chatbot.prueba.dao.PersonRepository;
 import chatbot.prueba.dao.UsuariosRepository;
@@ -36,7 +37,7 @@ public class BotBl {
         this.chatRepository = chatRepository;
     }
 
- //This method process and update when a user is send a message to the chatbot
+ /**This method process and update when a user is send a message to the chatbot
  public List<String> processUpdate(Update update) {
   LOGGER.info("Recibiendo update {} ", update);
 
@@ -45,7 +46,6 @@ public class BotBl {
   continueChatWithUser(update, usuario, chatResponse);
   return chatResponse;
 
-<<<<<<< HEAD
  /**Si es la primera vez pedir una imagen para su perfil
   List<String> result = new ArrayList<>();
   if (initUser(update.getMessage().getFrom())) {
@@ -56,27 +56,30 @@ public class BotBl {
             result.add("Bienvenido al Bot");
         }
     return result;
-*/
+
   }
+*/
 
 
- /**
- public int processUpdate(Update update){
+ public ResponseConversation processUpdate(Update update){
   LOGGER.info("Receiving an update from user {}",update);
   int response = 0;
+  List<String> options = new ArrayList<>();
+
   if(initUser(update)){
    LOGGER.info("First time using app for: {} ",update.getMessage().getFrom() );
    response = 1;
   }
   else{
-   List<Persona> allCars;
+ //  List<Persona> allCars;
    Boolean validation;
    String newLastName,newFirstName,newCellphone,newCI,newBrand,newModel,newEnrollmentNumber,newPassenger;
+   Integer newci;
    Integer idUser;
   // CpCar newCar;
    Persona persona;
    Usuario usuario = usuariosRepository.findByBotUserId(update.getMessage().getFrom().getId().toString());
-   int last_conversation = usuario.getIdusuario();
+   int last_conversation = usuario.getConversacionId();
    //What happens when chatbot receives a response to a conversation "last conversation"
    switch (last_conversation){
     //****************************************\\
@@ -94,11 +97,11 @@ public class BotBl {
       personRepository.save(persona);
       response = 2;
      }
-     else{
-      response = 4;
-     }
-
+      else{
+       response = 3;
+          }
      break;
+
     case 2:
      idUser = usuario.getIdpersona().getIdpersona();
      LOGGER.info("Buscando el id {} en CpPerson",idUser);
@@ -108,16 +111,17 @@ public class BotBl {
      if(validation){
       persona.setNombre(newFirstName);
       personRepository.save(persona);
-      response = 3;
+    response = 5;
      }
      else{
-      response = 5;
+      response = 4;
      }
      break;
+
     //****************************************\\
-    //Here the user can correct its mistakes on the registering\\
+    // case 3 and 4 Here the user can correct its mistakes on the registering\\
     //****************************************\\
-    case 4:
+    case 3:
      //Try again to enter Last Name
      idUser = usuario.getIdpersona().getIdpersona();
      persona = personRepository.findById(idUser).get();
@@ -130,10 +134,11 @@ public class BotBl {
      }
      else{
 
-      response = 4;
+      response = 3;
      }
      break;
-    case 5:
+
+    case 4:
      //Try again to enter First Name
      idUser = usuario.getIdpersona().getIdpersona();
      persona = personRepository.findById(idUser).get();
@@ -142,110 +147,81 @@ public class BotBl {
      if(validation){
       persona.setNombre(newFirstName);
       personRepository.save(persona);
-      response = 3;
-     }
-     else{
       response = 5;
      }
-     break;
-    //****************************************\\
-    //Here starts the carpooler part\\
-    //****************************************\\
-    case 6:
-     idUser = usuario.getIdpersona().getIdpersona();
-     LOGGER.info("Buscando el id {} en CpPerson",idUser);
-     persona = personRepository.findById(idUser).get();
-     newCellphone = update.getMessage().getText();
-     if(isValidCellphone(newCellphone)){
-      persona.setTelefono(newCellphone);
-      personRepository.save(persona);
-      response = 7;
-     }
      else{
-      response = 8;
-     }
-     break;
-    case 7:
-     idUser = usuario.getIdpersona().getIdpersona();
-     LOGGER.info("Buscando el id {} en CpPerson",idUser);
-     persona = personRepository.findById(idUser).get();
-     newCI = update.getMessage().getText();
-     if(isValidCI(newCI)){
-      persona.setCi(newCI);
-      personRepository.save(persona);
-      response = 10;
-     }
-     else{
-      response = 9;
+      response = 4;
      }
      break;
 
-    case 8:
-     idUser = usuario.getIdpersona().getIdpersona();
-     persona = personRepository.findById(idUser).get();
-     newCellphone = update.getMessage().getText();
-     if(isValidCellphone(newCellphone)){
-      persona.setTelefono(newCellphone);
-      personRepository.save(persona);
-      response = 7;
-     }
-     else{
-      response = 8;
-     }
-     break;
+       //****************************************\\
+       //aqui se guarda el ci y telefono de la persona con su validacion\\
+       //****************************************\\
+       case 5:
+           idUser = usuario.getIdpersona().getIdpersona();
+           LOGGER.info("Buscando el id {} en CpPerson",idUser);
+           persona = personRepository.findById(idUser).get();
+           newCellphone = update.getMessage().getText();
+           if(isValidCellphone(newCellphone)){
+               persona.setTelefono(newCellphone);
+               personRepository.save(persona);
+               response = 6;
+           }
+           else{
+               response = 7;
+           }
+           break;
+       case 6:
+           idUser = usuario.getIdpersona().getIdpersona();
+           LOGGER.info("Buscando el id {} en CpPerson",idUser);
+           persona = personRepository.findById(idUser).get();
+           newCI = update.getMessage().getText();
+           if(isValidCI(newCI)){
+               persona.setCi(newCI);
+               personRepository.save(persona);
+               response = 9;
+           }
+           else{
+               response = 8;
+           }
+           break;
+       case 7:
+           idUser = usuario.getIdpersona().getIdpersona();
+           persona = personRepository.findById(idUser).get();
+           newCellphone = update.getMessage().getText();
+           if(isValidCellphone(newCellphone)){
+               persona.setTelefono(newCellphone);
+               personRepository.save(persona);
+               response = 6;
+           }
+           else{
+               response = 7;
+           }
+           break;
 
-    case 9:
-     idUser = usuario.getIdpersona().getIdpersona();
-     persona = personRepository.findById(idUser).get();
-     newCI = update.getMessage().getText();
-     if(isValidCI(newCI)){
-      persona.setCi(newCI);
-      personRepository.save(persona);
-      response = 10;
-     }
-     else{
-      response = 9;
-     }
-     break;
-    //****************************************\\
-    //Here is the Menu for Carpooler\\
-    //****************************************\\
-    case 10:
-     idUser = usuario.getIdpersona().getIdpersona();
-     LOGGER.info("Buscando el id {} en CpPerson",idUser);
-     persona = personRepository.findById(idUser).get();
-     response = 10;
-     //Here is the menu for the carpooler
-     if(update.getMessage().getText().equals("Registrar Vehículo")){
-      response = 11;
-     }
-     if(update.getMessage().getText().equals("Ver Vehículos")){
-      response = 19;
-     }
-     if(update.getMessage().getText().equals("Registrar Viaje")){
-      response = 10;
-     }
-     if(update.getMessage().getText().equals("Ver viajes")){
-      response = 10;
-     }
-     if(update.getMessage().getText().equals("Volver al Menú Principal")){
-      response = 3;
-     }
-     break;
+       case 8:
+           idUser = usuario.getIdpersona().getIdpersona();
+           persona = personRepository.findById(idUser).get();
+           newCI = update.getMessage().getText();
+           if(isValidCI(newCI)){
+               persona.setCi(newCI);
+               personRepository.save(persona);
+               response = 9;
+           }
+           else{
+               response = 8;
+           }
+           break;
 
-    case 19:
-     response = 10;
-     break;
 
    }
-   usuario.setIdusuario(response);
+   usuario.setConversacionId(response);
    usuariosRepository.save(usuario);
   }
-  return response;
-=======
->>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
+  ResponseConversation result = new ResponseConversation(response,options);
+  return result;
  }
-*/
+
 
 
 
@@ -259,22 +235,18 @@ public class BotBl {
   // Obtener el ultimo mensaje que envió el usuario
   Chat lastMessage = chatRepository.findLastChatByUserId(usuario.getIdusuario());
   // Preparo la variable para retornar la respuesta
-
   String response = null;
   // Si el ultimo mensaje no existe (es la primera conversación)
 
   if (lastMessage == null) {
    // Retornamos 1
    LOGGER.info("Primer mensaje del usuario botUserId{}", usuario.getBotUserId());
-<<<<<<< HEAD
-   response = "bienvenido ";
-=======
    response="Bienvenido a AsisMedBot" +
            "Soy un asistente automatizado que puedo ayudarte a realizar una reserva medica desde cualquier lugar" +
            "/inicio";
->>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
   } else {
-   // Si existe convesasción previa iniciamos la variable del ultimo mensaje en 1
+
+   // Si existe conversación previa iniciamos la variable del ultimo mensaje en 1
    int lastMessageInt = 0;
    try {
     // Intenemos obtener el ultimo mensaje retornado y lo convertimos a entero.
@@ -282,47 +254,11 @@ public class BotBl {
     lastMessageInt = Integer.parseInt(lastMessage.getOutMessage());
     response = "" + (lastMessageInt + 1);
    } catch (NumberFormatException nfe) {
-<<<<<<< HEAD
-    response = "hola de nuevo ";
-=======
     response = "Hola de nuevo, soy Bender" +
-            "para  realizar la reserva, porfvor registrate" +
+            " para  realizar la reserva, por favor registrate en" +
             "/registro";
->>>>>>> 47a55434708f29351eb7e42a3000057d9c477ba5
    }
   }
-
-  /**
-  Integer idUser;
-  Persona persona;
-  int responseuno = 0;
-
-  int lastMessage2 = usuario.getIdusuario();
-  switch (lastMessage2){
-   case 10:
-    idUser = usuario.getIdpersona().getIdpersona();
-    LOGGER.info("Buscando el id {} en CpPerson",idUser);
-    persona = personRepository.findById(idUser).get();
-    responseuno = 10;
-    //Here is the menu for the carpooler
-    if(update.getMessage().getText().equals("Registrar Vehículo")){
-     responseuno = 11;
-    }
-    if(update.getMessage().getText().equals("Ver Vehículos")){
-     responseuno = 19;
-    }
-    if(update.getMessage().getText().equals("Registrar Viaje")){
-     responseuno = 10;
-    }
-    if(update.getMessage().getText().equals("Ver viajes")){
-     responseuno = 10;
-    }
-    if(update.getMessage().getText().equals("Volver al Menú Principal")){
-     responseuno = 3;
-    }
-    break;
-  }
-*/
 
    LOGGER.info("PROCESSING IN MESSAGE: {} from user {}" ,update.getMessage().getText(), usuario.getIdusuario());
   // Creamos el objeto CpChat con la respuesta a la presente conversación.
@@ -341,7 +277,40 @@ public class BotBl {
  }
 
 
-//NUEVO USUARIO
+ //NUEVO USUARIO
+ private boolean initUser(Update update){
+  boolean response = false;
+  User user = update.getMessage().getFrom();
+  Usuario usuario = usuariosRepository.findByBotUserId(user.getId().toString());
+  if(usuario==null){
+   Persona persona = new Persona();
+   persona.setNombre(user.getFirstName());
+
+   if(user.getLastName() == null){
+    persona.setApellido("-");
+   }
+   else{
+    persona.setNombre(user.getLastName());
+   }
+   persona.setStatus(Estatus.ACTIVE.getEstatus());
+   persona.setTxHost("localhost");
+   persona.setTxUser("admin");
+   persona.setTxDate(new Date());
+   personRepository.save(persona);
+   usuario = new Usuario();
+   usuario.setBotUserId(user.getId().toString());
+   usuario.setChatUserId(update.getMessage().getChatId().toString());
+   usuario.setIdpersona(persona);
+   usuario.setConversacionId(1);
+   usuario.setTxHost("localhost");
+   usuario.setTxUser("admin");
+   usuario.setTxDate(new Date());
+   usuariosRepository.save(usuario);
+    response = true;
+  }
+  return response;
+ }
+/**NUEVO USUARIO
  private Usuario  initUser(User user){
 // boolean result = false;
  //User user = update.getMessage().getFrom();
@@ -373,7 +342,7 @@ public class BotBl {
  }
  return usuario;
  }
-
+*/
  private boolean isOnlyAlphabeticalCharacters(String text){
  Boolean validation = true;
  for(int i=0;i<text.length();i++){
@@ -446,6 +415,25 @@ public class BotBl {
   return validation;
  }
 
+    private boolean isValidCellphone(String text){
+        Boolean validation = true;
+        for(int i=0;i<text.length();i++){
+            char ch = text.charAt(i);
+            if(!Character.isDigit(ch)){
+                validation = false;
+            }
+        }
+        if(isOnlySpaces(text)){
+            validation = false;
+        }
+        if(text.length()!=8){
+            validation = false;
+        }
+        if(text.charAt(0)!='6' && text.charAt(0)!='7'){
+            validation = false;
+        }
+        return validation;
+    }
  private boolean isOnlyAlphaNumeric(String text){
   boolean validation = true;
   for(int i=0;i<text.length();i++){
