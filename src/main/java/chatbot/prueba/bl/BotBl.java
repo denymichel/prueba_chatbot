@@ -76,18 +76,17 @@ public class BotBl {
    String newLastName,newFirstName,newCellphone,newCI,newBrand,newModel,newEnrollmentNumber,newPassenger;
    Integer newci;
    Integer idUser;
-  // CpCar newCar;
    Persona persona;
    Usuario usuario = usuariosRepository.findByBotUserId(update.getMessage().getFrom().getId().toString());
    int last_conversation = usuario.getConversacionId();
-   //What happens when chatbot receives a response to a conversation "last conversation"
+   //resopuesta a la ultima conversacion
    switch (last_conversation){
     //****************************************\\
-    //Here is the initial registering\\
+    // Inicio del reistro del Paciente\\
     //****************************************\\
     case 1:
      idUser = usuario.getIdpersona().getIdpersona();
-     LOGGER.info("Buscando el id {} en CpPerson",idUser);
+     LOGGER.info("Buscando el id {} en Persona",idUser);
      persona = personRepository.findById(idUser).get();
      newLastName = update.getMessage().getText();
      //See if the Last name only has alphabetical Letters and spaces
@@ -104,7 +103,7 @@ public class BotBl {
 
     case 2:
      idUser = usuario.getIdpersona().getIdpersona();
-     LOGGER.info("Buscando el id {} en CpPerson",idUser);
+     LOGGER.info("Buscando el id {} en Persona",idUser);
      persona = personRepository.findById(idUser).get();
      newFirstName = update.getMessage().getText();
      validation = isOnlyAlphabeticalCharacters(newFirstName);
@@ -212,6 +211,42 @@ public class BotBl {
                response = 8;
            }
            break;
+       case 9:
+           idUser = usuario.getIdpersona().getIdpersona();
+           LOGGER.info("Buscando el id {} en Persona",idUser);
+           persona = personRepository.findById(idUser).get();
+           response = 9;
+           //Here is the menu for the carpooler
+           if(update.getMessage().getText().equals("Si")) {
+               response = 10;
+           }else if(update.getMessage().getText().equals("No")){
+               response = 11;
+           }else{
+               response=12;
+           }
+           break;
+       case 10:
+           idUser = usuario.getIdpersona().getIdpersona();
+           LOGGER.info("Buscando el id {} en CpPerson",idUser);
+           persona = personRepository.findById(idUser).get();
+           response = 10;
+           //Here is the menu for the carpooler
+           if(update.getMessage().getText().equals("Ver Especialidades")){
+               response = 19;
+           }
+
+
+           if(update.getMessage().getText().equals("Registrar cita Medica")){
+               LOGGER.info("Registrar cita Medica");
+               response = 27;
+           }
+
+
+           if(update.getMessage().getText().equals("Volver al Menú Principal")){
+               response = 3;
+           }
+           break;
+
 
 
    }
